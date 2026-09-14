@@ -1,0 +1,7 @@
+{
+	"url": "http://localhost:11434/api/chat",
+	"timeout": 600,
+	"json": {
+		"stream": false
+	}
+}

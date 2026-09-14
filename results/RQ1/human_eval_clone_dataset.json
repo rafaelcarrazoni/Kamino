@@ -1,0 +1,795 @@
+[
+  {
+    "id": "HumanEval/23",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return length of given string\n    // >>> stringLength((\"\"))\n    // (0l)\n    // >>> stringLength((\"abc\"))\n    // (3l)\n    public static long strlen(String string) {\n    }\n    public static void main(String[] args) {\n    assert(strlen((\"\")) == (0l));\n    assert(strlen((\"x\")) == (1l));\n    assert(strlen((\"asdasnakj\")) == (9l));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(strlen((\"\")) == (0l));\n    assert(strlen((\"x\")) == (1l));\n    assert(strlen((\"asdasnakj\")) == (9l));\n    }\n\n}\n"
+    ],
+    "description": "Return length of given string\n>>> strlen('')\n0\n>>> strlen('abc')\n3",
+    "metadata": {
+      "libs": [],
+      "params": "string: str",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='strlen',\n      args=arguments(\n        args=[\n          arg(\n            arg='string',\n            annotation=Name(id='str', ctx=Load()))]),\n      body=[\n        Return(\n          value=Call(\n            func=Name(id='len', ctx=Load()),\n            args=[\n              Name(id='string', ctx=Load())]))],\n      returns=Name(id='int', ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return length of given string\n    // >>> stringLength((\"\"))\n    // (0l)\n    // >>> stringLength((\"abc\"))\n    // (3l)\n    public static long strlen(String string) {\nreturn string.length();\n    }\n    public static void main(String[] args) {\n    assert(strlen((\"\")) == (0l));\n    assert(strlen((\"x\")) == (1l));\n    assert(strlen((\"asdasnakj\")) == (9l));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/30",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return only positive numbers in the array list.\n    // >>> getPositive((new ArrayList<Long>(Arrays.asList((long)-1l, (long)2l, (long)-4l, (long)5l, (long)6l))))\n    // (new ArrayList<Long>(Arrays.asList((long)2l, (long)5l, (long)6l)))\n    // >>> getPositive((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)9l, (long)0l, (long)123l, (long)1l, (long)-10l))))\n    // (new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)2l, (long)3l, (long)9l, (long)123l, (long)1l)))\n    public static ArrayList<Long> getPositive(ArrayList<Long> l) {\n    }\n    public static void main(String[] args) {\n    assert(getPositive((new ArrayList<Long>(Arrays.asList((long)-1l, (long)-2l, (long)4l, (long)5l, (long)6l)))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)5l, (long)6l)))));\n    assert(getPositive((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l, (long)1l, (long)-10l)))).equals((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)2l, (long)3l, (long)3l, (long)9l, (long)123l, (long)1l)))));\n    assert(getPositive((new ArrayList<Long>(Arrays.asList((long)-1l, (long)-2l)))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(getPositive((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(getPositive((new ArrayList<Long>(Arrays.asList((long)-1l, (long)-2l, (long)4l, (long)5l, (long)6l)))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)5l, (long)6l)))));\n    assert(getPositive((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l, (long)1l, (long)-10l)))).equals((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)2l, (long)3l, (long)3l, (long)9l, (long)123l, (long)1l)))));\n    assert(getPositive((new ArrayList<Long>(Arrays.asList((long)-1l, (long)-2l)))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(getPositive((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    }\n\n}\n"
+    ],
+    "description": "Return only positive numbers in the list.\n>>> get_positive([-1, 2, -4, 5, 6])\n[2, 5, 6]\n>>> get_positive([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])\n[5, 3, 2, 3, 9, 123, 1]",
+    "metadata": {
+      "libs": [],
+      "params": "l: list",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='get_positive',\n      args=arguments(\n        args=[\n          arg(\n            arg='l',\n            annotation=Name(id='list', ctx=Load()))]),\n      body=[\n        Return(\n          value=ListComp(\n            elt=Name(id='e', ctx=Load()),\n            generators=[\n              comprehension(\n                target=Name(id='e', ctx=Store()),\n                iter=Name(id='l', ctx=Load()),\n                ifs=[\n                  Compare(\n                    left=Name(id='e', ctx=Load()),\n                    ops=[\n                      Gt()],\n                    comparators=[\n                      Constant(value=0)])],\n                is_async=0)]))])])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return only positive numbers in the array list.\n    // >>> getPositive((new ArrayList<Long>(Arrays.asList((long)-1l, (long)2l, (long)-4l, (long)5l, (long)6l))))\n    // (new ArrayList<Long>(Arrays.asList((long)2l, (long)5l, (long)6l)))\n    // >>> getPositive((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)9l, (long)0l, (long)123l, (long)1l, (long)-10l))))\n    // (new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)2l, (long)3l, (long)9l, (long)123l, (long)1l)))\n    public static ArrayList<Long> getPositive(ArrayList<Long> l) {\nreturn l.stream()\n             .filter(num -> num > 0)\n             .collect(Collectors.toCollection(ArrayList::new));\n    }\n    public static void main(String[] args) {\n    assert(getPositive((new ArrayList<Long>(Arrays.asList((long)-1l, (long)-2l, (long)4l, (long)5l, (long)6l)))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)5l, (long)6l)))));\n    assert(getPositive((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l, (long)1l, (long)-10l)))).equals((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)2l, (long)3l, (long)3l, (long)9l, (long)123l, (long)1l)))));\n    assert(getPositive((new ArrayList<Long>(Arrays.asList((long)-1l, (long)-2l)))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(getPositive((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/47",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return 2^n modulo p (be aware of numerics).\n    // >>> modp((3l), (5l))\n    // (3l)\n    // >>> modp((1101l), (101l))\n    // (2l)\n    // >>> modp((0l), (101l))\n    // (1l)\n    // >>> modp((3l), (11l))\n    // (8l)\n    // >>> modp((100l), (101l))\n    // (1l)\n    public static long modp(long n, long p) {\n    }\n    public static void main(String[] args) {\n    assert(modp((3l), (5l)) == (3l));\n    assert(modp((1101l), (101l)) == (2l));\n    assert(modp((0l), (101l)) == (1l));\n    assert(modp((3l), (11l)) == (8l));\n    assert(modp((100l), (101l)) == (1l));\n    assert(modp((30l), (5l)) == (4l));\n    assert(modp((31l), (5l)) == (3l));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(modp((3l), (5l)) == (3l));\n    assert(modp((1101l), (101l)) == (2l));\n    assert(modp((0l), (101l)) == (1l));\n    assert(modp((3l), (11l)) == (8l));\n    assert(modp((100l), (101l)) == (1l));\n    assert(modp((30l), (5l)) == (4l));\n    assert(modp((31l), (5l)) == (3l));\n    }\n\n}\n"
+    ],
+    "description": "Return 2^n modulo p (be aware of numerics).\n>>> modp(3, 5)\n3\n>>> modp(1101, 101)\n2\n>>> modp(0, 101)\n1\n>>> modp(3, 11)\n8\n>>> modp(100, 101)\n1",
+    "metadata": {
+      "libs": [],
+      "params": "n: int, p: int",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='modp',\n      args=arguments(\n        args=[\n          arg(\n            arg='n',\n            annotation=Name(id='int', ctx=Load())),\n          arg(\n            arg='p',\n            annotation=Name(id='int', ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='ret', ctx=Store())],\n          value=Constant(value=1)),\n        For(\n          target=Name(id='i', ctx=Store()),\n          iter=Call(\n            func=Name(id='range', ctx=Load()),\n            args=[\n              Name(id='n', ctx=Load())]),\n          body=[\n            Assign(\n              targets=[\n                Name(id='ret', ctx=Store())],\n              value=BinOp(\n                left=BinOp(\n                  left=Constant(value=2),\n                  op=Mult(),\n                  right=Name(id='ret', ctx=Load())),\n                op=Mod(),\n                right=Name(id='p', ctx=Load())))]),\n        Return(\n          value=Name(id='ret', ctx=Load()))])])"
+    },
+    "clones": []
+  },
+  {
+    "id": "HumanEval/34",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return maximum element in the array list.\n    // >>> maxElement((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l))))\n    // (3l)\n    // >>> maxElement((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)9l, (long)0l, (long)123l, (long)1l, (long)-10l))))\n    // (123l)\n    public static long maxElement(ArrayList<Long> l) {\n    }\n    public static void main(String[] args) {\n    assert(maxElement((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l)))) == (3l));\n    assert(maxElement((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)9l, (long)0l, (long)124l, (long)1l, (long)-10l)))) == (124l));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(maxElement((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l)))) == (3l));\n    assert(maxElement((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)9l, (long)0l, (long)124l, (long)1l, (long)-10l)))) == (124l));\n    }\n\n}\n"
+    ],
+    "description": "Return maximum element in the list.\n>>> max_element([1, 2, 3])\n3\n>>> max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])\n123",
+    "metadata": {
+      "libs": [],
+      "params": "l: list",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='max_element',\n      args=arguments(\n        args=[\n          arg(\n            arg='l',\n            annotation=Name(id='list', ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='m', ctx=Store())],\n          value=Subscript(\n            value=Name(id='l', ctx=Load()),\n            slice=Constant(value=0),\n            ctx=Load())),\n        For(\n          target=Name(id='e', ctx=Store()),\n          iter=Name(id='l', ctx=Load()),\n          body=[\n            If(\n              test=Compare(\n                left=Name(id='e', ctx=Load()),\n                ops=[\n                  Gt()],\n                comparators=[\n                  Name(id='m', ctx=Load())]),\n              body=[\n                Assign(\n                  targets=[\n                    Name(id='m', ctx=Store())],\n                  value=Name(id='e', ctx=Load()))])]),\n        Return(\n          value=Name(id='m', ctx=Load()))])])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return maximum element in the array list.\n    // >>> maxElement((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l))))\n    // (3l)\n    // >>> maxElement((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)9l, (long)0l, (long)123l, (long)1l, (long)-10l))))\n    // (123l)\n    public static long maxElement(ArrayList<Long> l) {\nreturn l.stream().max(Long::compare).get();\n    }\n    public static void main(String[] args) {\n    assert(maxElement((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l)))) == (3l));\n    assert(maxElement((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)9l, (long)0l, (long)124l, (long)1l, (long)-10l)))) == (124l));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/26",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // From an array array list of integers, remove all elements that occur more than once.\n    // Keep order of elements left the same as in the input.\n    // >>> removeDuplicates((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)2l, (long)4l))))\n    // (new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)4l)))\n    public static ArrayList<Long> removeDuplicates(ArrayList<Long> numbers) {\n    }\n    public static void main(String[] args) {\n    assert(removeDuplicates((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(removeDuplicates((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))));\n    assert(removeDuplicates((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)2l, (long)4l, (long)3l, (long)5l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)4l, (long)5l)))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(removeDuplicates((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(removeDuplicates((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))));\n    assert(removeDuplicates((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)2l, (long)4l, (long)3l, (long)5l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)4l, (long)5l)))));\n    }\n\n}\n"
+    ],
+    "description": "From a list of integers, remove all elements that occur more than once.\nKeep order of elements left the same as in the input.\n>>> remove_duplicates([1, 2, 3, 2, 4])\n[1, 3, 4]",
+    "metadata": {
+      "libs": [],
+      "params": "numbers: List[int]",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List')],\n      level=0),\n    FunctionDef(\n      name='remove_duplicates',\n      args=arguments(\n        args=[\n          arg(\n            arg='numbers',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='int', ctx=Load()),\n              ctx=Load()))]),\n      body=[\n        Import(\n          names=[\n            alias(name='collections')]),\n        Assign(\n          targets=[\n            Name(id='c', ctx=Store())],\n          value=Call(\n            func=Attribute(\n              value=Name(id='collections', ctx=Load()),\n              attr='Counter',\n              ctx=Load()),\n            args=[\n              Name(id='numbers', ctx=Load())])),\n        Return(\n          value=ListComp(\n            elt=Name(id='n', ctx=Load()),\n            generators=[\n              comprehension(\n                target=Name(id='n', ctx=Store()),\n                iter=Name(id='numbers', ctx=Load()),\n                ifs=[\n                  Compare(\n                    left=Subscript(\n                      value=Name(id='c', ctx=Load()),\n                      slice=Name(id='n', ctx=Load()),\n                      ctx=Load()),\n                    ops=[\n                      LtE()],\n                    comparators=[\n                      Constant(value=1)])],\n                is_async=0)]))],\n      returns=Subscript(\n        value=Name(id='List', ctx=Load()),\n        slice=Name(id='int', ctx=Load()),\n        ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // From an array array list of integers, remove all elements that occur more than once.\n    // Keep order of elements left the same as in the input.\n    // >>> removeDuplicates((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)2l, (long)4l))))\n    // (new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)4l)))\n    public static ArrayList<Long> removeDuplicates(ArrayList<Long> numbers) {\nMap<Long, Long> countMap = new HashMap<>();\n    for (Long number : numbers) {\n        countMap.put(number, countMap.getOrDefault(number, 0L) + 1);\n    }\n    \n    ArrayList<Long> result = new ArrayList<>();\n    for (Long number : numbers) {\n        if (!countMap.containsKey(number) || countMap.get(number) == 1) {\n            result.add(number);\n        }\n    }\n    \n    return result;\n    }\n    public static void main(String[] args) {\n    assert(removeDuplicates((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(removeDuplicates((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))));\n    assert(removeDuplicates((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)2l, (long)4l, (long)3l, (long)5l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)4l, (long)5l)))));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/33",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return sorted unique elements in an array array list\n    // >>> unique((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l))))\n    // (new ArrayList<Long>(Arrays.asList((long)0l, (long)2l, (long)3l, (long)5l, (long)9l, (long)123l)))\n    public static ArrayList<Long> unique(ArrayList<Long> l) {\n    }\n    public static void main(String[] args) {\n    assert(unique((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l)))).equals((new ArrayList<Long>(Arrays.asList((long)0l, (long)2l, (long)3l, (long)5l, (long)9l, (long)123l)))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(unique((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l)))).equals((new ArrayList<Long>(Arrays.asList((long)0l, (long)2l, (long)3l, (long)5l, (long)9l, (long)123l)))));\n    }\n\n}\n"
+    ],
+    "description": "Return sorted unique elements in a list\n>>> unique([5, 3, 5, 2, 3, 3, 9, 0, 123])\n[0, 2, 3, 5, 9, 123]",
+    "metadata": {
+      "libs": [],
+      "params": "l: list",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='unique',\n      args=arguments(\n        args=[\n          arg(\n            arg='l',\n            annotation=Name(id='list', ctx=Load()))]),\n      body=[\n        Return(\n          value=Call(\n            func=Name(id='sorted', ctx=Load()),\n            args=[\n              Call(\n                func=Name(id='list', ctx=Load()),\n                args=[\n                  Call(\n                    func=Name(id='set', ctx=Load()),\n                    args=[\n                      Name(id='l', ctx=Load())])])]))])])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return sorted unique elements in an array array list\n    // >>> unique((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l))))\n    // (new ArrayList<Long>(Arrays.asList((long)0l, (long)2l, (long)3l, (long)5l, (long)9l, (long)123l)))\n    public static ArrayList<Long> unique(ArrayList<Long> l) {\nSet<Long> set = new HashSet<>(l);\n    return new ArrayList<>(set);\n    }\n    public static void main(String[] args) {\n    assert(unique((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l)))).equals((new ArrayList<Long>(Arrays.asList((long)0l, (long)2l, (long)3l, (long)5l, (long)9l, (long)123l)))));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/41",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // pairs_sum_to_zero takes an array array list of integers as an input.\n    // it returns true if there are two distinct elements in the array list that\n    // sum to zero, and false otherwise.\n    // >>> pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)5l, (long)0l))))\n    // (false)\n    // >>> pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)-2l, (long)1l))))\n    // (false)\n    // >>> pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)7l))))\n    // (false)\n    // >>> pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)2l, (long)4l, (long)-5l, (long)3l, (long)5l, (long)7l))))\n    // (true)\n    // >>> pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l))))\n    // (false)\n    public static boolean pairsSumToZero(ArrayList<Long> l) {\n    }\n    public static void main(String[] args) {\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)5l, (long)0l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)-2l, (long)1l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)7l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)2l, (long)4l, (long)-5l, (long)3l, (long)5l, (long)7l)))) == (true));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)3l, (long)2l, (long)30l)))) == (true));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)3l, (long)2l, (long)31l)))) == (true));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)4l, (long)2l, (long)30l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)4l, (long)2l, (long)31l)))) == (false));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)5l, (long)0l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)-2l, (long)1l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)7l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)2l, (long)4l, (long)-5l, (long)3l, (long)5l, (long)7l)))) == (true));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)3l, (long)2l, (long)30l)))) == (true));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)3l, (long)2l, (long)31l)))) == (true));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)4l, (long)2l, (long)30l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)4l, (long)2l, (long)31l)))) == (false));\n    }\n\n}\n"
+    ],
+    "description": "pairs_sum_to_zero takes a list of integers as an input.\nit returns True if there are two distinct elements in the list that\nsum to zero, and False otherwise.\n>>> pairs_sum_to_zero([1, 3, 5, 0])\nFalse\n>>> pairs_sum_to_zero([1, 3, -2, 1])\nFalse\n>>> pairs_sum_to_zero([1, 2, 3, 7])\nFalse\n>>> pairs_sum_to_zero([2, 4, -5, 3, 5, 7])\nTrue\n>>> pairs_sum_to_zero([1])\nFalse",
+    "metadata": {
+      "libs": [],
+      "params": "l",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='pairs_sum_to_zero',\n      args=arguments(\n        args=[\n          arg(arg='l')]),\n      body=[\n        For(\n          target=Tuple(\n            elts=[\n              Name(id='i', ctx=Store()),\n              Name(id='l1', ctx=Store())],\n            ctx=Store()),\n          iter=Call(\n            func=Name(id='enumerate', ctx=Load()),\n            args=[\n              Name(id='l', ctx=Load())]),\n          body=[\n            For(\n              target=Name(id='j', ctx=Store()),\n              iter=Call(\n                func=Name(id='range', ctx=Load()),\n                args=[\n                  BinOp(\n                    left=Name(id='i', ctx=Load()),\n                    op=Add(),\n                    right=Constant(value=1)),\n                  Call(\n                    func=Name(id='len', ctx=Load()),\n                    args=[\n                      Name(id='l', ctx=Load())])]),\n              body=[\n                If(\n                  test=Compare(\n                    left=BinOp(\n                      left=Name(id='l1', ctx=Load()),\n                      op=Add(),\n                      right=Subscript(\n                        value=Name(id='l', ctx=Load()),\n                        slice=Name(id='j', ctx=Load()),\n                        ctx=Load())),\n                    ops=[\n                      Eq()],\n                    comparators=[\n                      Constant(value=0)]),\n                  body=[\n                    Return(\n                      value=Constant(value=True))])])]),\n        Return(\n          value=Constant(value=False))])])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // pairs_sum_to_zero takes an array array list of integers as an input.\n    // it returns true if there are two distinct elements in the array list that\n    // sum to zero, and false otherwise.\n    // >>> pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)5l, (long)0l))))\n    // (false)\n    // >>> pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)-2l, (long)1l))))\n    // (false)\n    // >>> pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)7l))))\n    // (false)\n    // >>> pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)2l, (long)4l, (long)-5l, (long)3l, (long)5l, (long)7l))))\n    // (true)\n    // >>> pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l))))\n    // (false)\n    public static boolean pairsSumToZero(ArrayList<Long> l) {\nSet<Long> seen = new HashSet<>();\n    for (Long num : l) {\n        if (seen.contains(-num)) {\n            return true;\n        }\n        seen.add(num);\n    }\n    return false;\n    }\n    public static void main(String[] args) {\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)5l, (long)0l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)3l, (long)-2l, (long)1l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)7l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)2l, (long)4l, (long)-5l, (long)3l, (long)5l, (long)7l)))) == (true));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)1l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)3l, (long)2l, (long)30l)))) == (true));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)3l, (long)2l, (long)31l)))) == (true));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)4l, (long)2l, (long)30l)))) == (false));\n    assert(pairsSumToZero((new ArrayList<Long>(Arrays.asList((long)-3l, (long)9l, (long)-1l, (long)4l, (long)2l, (long)31l)))) == (false));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/7",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Filter an input array list of strings only for ones that contain given substring\n    // >>> filterBySubstring((new ArrayList<String>(Arrays.asList())), (\"a\"))\n    // (new ArrayList<String>(Arrays.asList()))\n    // >>> filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"abc\", (String)\"bacd\", (String)\"cde\", (String)\"array\"))), (\"a\"))\n    // (new ArrayList<String>(Arrays.asList((String)\"abc\", (String)\"bacd\", (String)\"array\")))\n    public static ArrayList<String> filterBySubstring(ArrayList<String> strings, String substring) {\n    }\n    public static void main(String[] args) {\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList())), (\"john\")).equals((new ArrayList<String>(Arrays.asList()))));\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"asd\", (String)\"xxy\", (String)\"john doe\", (String)\"xxxAAA\", (String)\"xxx\"))), (\"xxx\")).equals((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"xxxAAA\", (String)\"xxx\")))));\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"asd\", (String)\"aaaxxy\", (String)\"john doe\", (String)\"xxxAAA\", (String)\"xxx\"))), (\"xx\")).equals((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"aaaxxy\", (String)\"xxxAAA\", (String)\"xxx\")))));\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"grunt\", (String)\"trumpet\", (String)\"prune\", (String)\"gruesome\"))), (\"run\")).equals((new ArrayList<String>(Arrays.asList((String)\"grunt\", (String)\"prune\")))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList())), (\"john\")).equals((new ArrayList<String>(Arrays.asList()))));\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"asd\", (String)\"xxy\", (String)\"john doe\", (String)\"xxxAAA\", (String)\"xxx\"))), (\"xxx\")).equals((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"xxxAAA\", (String)\"xxx\")))));\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"asd\", (String)\"aaaxxy\", (String)\"john doe\", (String)\"xxxAAA\", (String)\"xxx\"))), (\"xx\")).equals((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"aaaxxy\", (String)\"xxxAAA\", (String)\"xxx\")))));\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"grunt\", (String)\"trumpet\", (String)\"prune\", (String)\"gruesome\"))), (\"run\")).equals((new ArrayList<String>(Arrays.asList((String)\"grunt\", (String)\"prune\")))));\n    }\n\n}\n"
+    ],
+    "description": "Filter an input list of strings only for ones that contain given substring\n>>> filter_by_substring([], 'a')\n[]\n>>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')\n['abc', 'bacd', 'array']",
+    "metadata": {
+      "libs": [],
+      "params": "strings: List[str], substring: str",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List')],\n      level=0),\n    FunctionDef(\n      name='filter_by_substring',\n      args=arguments(\n        args=[\n          arg(\n            arg='strings',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='str', ctx=Load()),\n              ctx=Load())),\n          arg(\n            arg='substring',\n            annotation=Name(id='str', ctx=Load()))]),\n      body=[\n        Return(\n          value=ListComp(\n            elt=Name(id='x', ctx=Load()),\n            generators=[\n              comprehension(\n                target=Name(id='x', ctx=Store()),\n                iter=Name(id='strings', ctx=Load()),\n                ifs=[\n                  Compare(\n                    left=Name(id='substring', ctx=Load()),\n                    ops=[\n                      In()],\n                    comparators=[\n                      Name(id='x', ctx=Load())])],\n                is_async=0)]))],\n      returns=Subscript(\n        value=Name(id='List', ctx=Load()),\n        slice=Name(id='str', ctx=Load()),\n        ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Filter an input array list of strings only for ones that contain given substring\n    // >>> filterBySubstring((new ArrayList<String>(Arrays.asList())), (\"a\"))\n    // (new ArrayList<String>(Arrays.asList()))\n    // >>> filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"abc\", (String)\"bacd\", (String)\"cde\", (String)\"array\"))), (\"a\"))\n    // (new ArrayList<String>(Arrays.asList((String)\"abc\", (String)\"bacd\", (String)\"array\")))\n    public static ArrayList<String> filterBySubstring(ArrayList<String> strings, String substring) {\nreturn strings.stream()\n                  .filter(s -> s.contains(substring))\n                  .collect(Collectors.toCollection(ArrayList::new));\n    }\n    public static void main(String[] args) {\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList())), (\"john\")).equals((new ArrayList<String>(Arrays.asList()))));\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"asd\", (String)\"xxy\", (String)\"john doe\", (String)\"xxxAAA\", (String)\"xxx\"))), (\"xxx\")).equals((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"xxxAAA\", (String)\"xxx\")))));\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"asd\", (String)\"aaaxxy\", (String)\"john doe\", (String)\"xxxAAA\", (String)\"xxx\"))), (\"xx\")).equals((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"aaaxxy\", (String)\"xxxAAA\", (String)\"xxx\")))));\n    assert(filterBySubstring((new ArrayList<String>(Arrays.asList((String)\"grunt\", (String)\"trumpet\", (String)\"prune\", (String)\"gruesome\"))), (\"run\")).equals((new ArrayList<String>(Arrays.asList((String)\"grunt\", (String)\"prune\")))));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/35",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.\n    // >>> fizzBuzz((50l))\n    // (0l)\n    // >>> fizzBuzz((78l))\n    // (2l)\n    // >>> fizzBuzz((79l))\n    // (3l)\n    public static long fizzBuzz(long n) {\n    }\n    public static void main(String[] args) {\n    assert(fizzBuzz((50l)) == (0l));\n    assert(fizzBuzz((78l)) == (2l));\n    assert(fizzBuzz((79l)) == (3l));\n    assert(fizzBuzz((100l)) == (3l));\n    assert(fizzBuzz((200l)) == (6l));\n    assert(fizzBuzz((4000l)) == (192l));\n    assert(fizzBuzz((10000l)) == (639l));\n    assert(fizzBuzz((100000l)) == (8026l));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(fizzBuzz((50l)) == (0l));\n    assert(fizzBuzz((78l)) == (2l));\n    assert(fizzBuzz((79l)) == (3l));\n    assert(fizzBuzz((100l)) == (3l));\n    assert(fizzBuzz((200l)) == (6l));\n    assert(fizzBuzz((4000l)) == (192l));\n    assert(fizzBuzz((10000l)) == (639l));\n    assert(fizzBuzz((100000l)) == (8026l));\n    }\n\n}\n"
+    ],
+    "description": "Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.\n>>> fizz_buzz(50)\n0\n>>> fizz_buzz(78)\n2\n>>> fizz_buzz(79)\n3",
+    "metadata": {
+      "libs": [],
+      "params": "n: int",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='fizz_buzz',\n      args=arguments(\n        args=[\n          arg(\n            arg='n',\n            annotation=Name(id='int', ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='ns', ctx=Store())],\n          value=List(ctx=Load())),\n        For(\n          target=Name(id='i', ctx=Store()),\n          iter=Call(\n            func=Name(id='range', ctx=Load()),\n            args=[\n              Name(id='n', ctx=Load())]),\n          body=[\n            If(\n              test=BoolOp(\n                op=Or(),\n                values=[\n                  Compare(\n                    left=BinOp(\n                      left=Name(id='i', ctx=Load()),\n                      op=Mod(),\n                      right=Constant(value=11)),\n                    ops=[\n                      Eq()],\n                    comparators=[\n                      Constant(value=0)]),\n                  Compare(\n                    left=BinOp(\n                      left=Name(id='i', ctx=Load()),\n                      op=Mod(),\n                      right=Constant(value=13)),\n                    ops=[\n                      Eq()],\n                    comparators=[\n                      Constant(value=0)])]),\n              body=[\n                Expr(\n                  value=Call(\n                    func=Attribute(\n                      value=Name(id='ns', ctx=Load()),\n                      attr='append',\n                      ctx=Load()),\n                    args=[\n                      Name(id='i', ctx=Load())]))])]),\n        Assign(\n          targets=[\n            Name(id='s', ctx=Store())],\n          value=Call(\n            func=Attribute(\n              value=Constant(value=''),\n              attr='join',\n              ctx=Load()),\n            args=[\n              Call(\n                func=Name(id='list', ctx=Load()),\n                args=[\n                  Call(\n                    func=Name(id='map', ctx=Load()),\n                    args=[\n                      Name(id='str', ctx=Load()),\n                      Name(id='ns', ctx=Load())])])])),\n        Assign(\n          targets=[\n            Name(id='ans', ctx=Store())],\n          value=Constant(value=0)),\n        For(\n          target=Name(id='c', ctx=Store()),\n          iter=Name(id='s', ctx=Load()),\n          body=[\n            AugAssign(\n              target=Name(id='ans', ctx=Store()),\n              op=Add(),\n              value=Compare(\n                left=Name(id='c', ctx=Load()),\n                ops=[\n                  Eq()],\n                comparators=[\n                  Constant(value='7')]))]),\n        Return(\n          value=Name(id='ans', ctx=Load()))])])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.\n    // >>> fizzBuzz((50l))\n    // (0l)\n    // >>> fizzBuzz((78l))\n    // (2l)\n    // >>> fizzBuzz((79l))\n    // (3l)\n    public static long fizzBuzz(long n) {\nreturn IntStream.range(1, (int)n)\n                    .filter(i -> i % 11 == 0 || i % 13 == 0)\n                    .mapToObj(i -> String.valueOf(i))\n                    .flatMapToInt(String::chars)\n                    .filter(c -> c == '7')\n                    .count();\n    }\n    public static void main(String[] args) {\n    assert(fizzBuzz((50l)) == (0l));\n    assert(fizzBuzz((78l)) == (2l));\n    assert(fizzBuzz((79l)) == (3l));\n    assert(fizzBuzz((100l)) == (3l));\n    assert(fizzBuzz((200l)) == (6l));\n    assert(fizzBuzz((4000l)) == (192l));\n    assert(fizzBuzz((10000l)) == (639l));\n    assert(fizzBuzz((100000l)) == (8026l));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/2",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Given a positive floating point number, it can be decomposed into\n    // and integer part (largest integer smaller than given number) and decimals\n    // (leftover part always smaller than 1).\n    // Return the decimal part of the number.\n    // >>> truncateNumber((3.5f))\n    // (0.5f)\n    public static float truncateNumber(float number) {\n    }\n    public static void main(String[] args) {\n    assert(truncateNumber((3.5f)) == (0.5f));\n    assert(truncateNumber((1.25f)) == (0.25f));\n    assert(truncateNumber((123.0f)) == (0.0f));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(truncateNumber((3.5f)) == (0.5f));\n    assert(truncateNumber((1.25f)) == (0.25f));\n    assert(truncateNumber((123.0f)) == (0.0f));\n    }\n\n}\n"
+    ],
+    "description": "Given a positive floating point number, it can be decomposed into\nand integer part (largest integer smaller than given number) and decimals\n(leftover part always smaller than 1).\n\nReturn the decimal part of the number.\n>>> truncate_number(3.5)\n0.5",
+    "metadata": {
+      "libs": [],
+      "params": "number: float",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='truncate_number',\n      args=arguments(\n        args=[\n          arg(\n            arg='number',\n            annotation=Name(id='float', ctx=Load()))]),\n      body=[\n        Return(\n          value=BinOp(\n            left=Name(id='number', ctx=Load()),\n            op=Mod(),\n            right=Constant(value=1.0)))],\n      returns=Name(id='float', ctx=Load()))])"
+    },
+    "clones": []
+  },
+  {
+    "id": "HumanEval/29",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Filter an input array list of strings only for ones that start with a given prefix.\n    // >>> filterByPrefix((new ArrayList<String>(Arrays.asList())), (\"a\"))\n    // (new ArrayList<String>(Arrays.asList()))\n    // >>> filterByPrefix((new ArrayList<String>(Arrays.asList((String)\"abc\", (String)\"bcd\", (String)\"cde\", (String)\"array\"))), (\"a\"))\n    // (new ArrayList<String>(Arrays.asList((String)\"abc\", (String)\"array\")))\n    public static ArrayList<String> filterByPrefix(ArrayList<String> strings, String prefix) {\n    }\n    public static void main(String[] args) {\n    assert(filterByPrefix((new ArrayList<String>(Arrays.asList())), (\"john\")).equals((new ArrayList<String>(Arrays.asList()))));\n    assert(filterByPrefix((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"asd\", (String)\"xxy\", (String)\"john doe\", (String)\"xxxAAA\", (String)\"xxx\"))), (\"xxx\")).equals((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"xxxAAA\", (String)\"xxx\")))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(filterByPrefix((new ArrayList<String>(Arrays.asList())), (\"john\")).equals((new ArrayList<String>(Arrays.asList()))));\n    assert(filterByPrefix((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"asd\", (String)\"xxy\", (String)\"john doe\", (String)\"xxxAAA\", (String)\"xxx\"))), (\"xxx\")).equals((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"xxxAAA\", (String)\"xxx\")))));\n    }\n\n}\n"
+    ],
+    "description": "Filter an input list of strings only for ones that start with a given prefix.\n>>> filter_by_prefix([], 'a')\n[]\n>>> filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'a')\n['abc', 'array']",
+    "metadata": {
+      "libs": [],
+      "params": "strings: List[str], prefix: str",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List')],\n      level=0),\n    FunctionDef(\n      name='filter_by_prefix',\n      args=arguments(\n        args=[\n          arg(\n            arg='strings',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='str', ctx=Load()),\n              ctx=Load())),\n          arg(\n            arg='prefix',\n            annotation=Name(id='str', ctx=Load()))]),\n      body=[\n        Return(\n          value=ListComp(\n            elt=Name(id='x', ctx=Load()),\n            generators=[\n              comprehension(\n                target=Name(id='x', ctx=Store()),\n                iter=Name(id='strings', ctx=Load()),\n                ifs=[\n                  Call(\n                    func=Attribute(\n                      value=Name(id='x', ctx=Load()),\n                      attr='startswith',\n                      ctx=Load()),\n                    args=[\n                      Name(id='prefix', ctx=Load())])],\n                is_async=0)]))],\n      returns=Subscript(\n        value=Name(id='List', ctx=Load()),\n        slice=Name(id='str', ctx=Load()),\n        ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Filter an input array list of strings only for ones that start with a given prefix.\n    // >>> filterByPrefix((new ArrayList<String>(Arrays.asList())), (\"a\"))\n    // (new ArrayList<String>(Arrays.asList()))\n    // >>> filterByPrefix((new ArrayList<String>(Arrays.asList((String)\"abc\", (String)\"bcd\", (String)\"cde\", (String)\"array\"))), (\"a\"))\n    // (new ArrayList<String>(Arrays.asList((String)\"abc\", (String)\"array\")))\n    public static ArrayList<String> filterByPrefix(ArrayList<String> strings, String prefix) {\nreturn strings.stream()\n                .filter(s -> s.startsWith(prefix))\n                .collect(Collectors.toCollection(ArrayList::new));\n    }\n    public static void main(String[] args) {\n    assert(filterByPrefix((new ArrayList<String>(Arrays.asList())), (\"john\")).equals((new ArrayList<String>(Arrays.asList()))));\n    assert(filterByPrefix((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"asd\", (String)\"xxy\", (String)\"john doe\", (String)\"xxxAAA\", (String)\"xxx\"))), (\"xxx\")).equals((new ArrayList<String>(Arrays.asList((String)\"xxx\", (String)\"xxxAAA\", (String)\"xxx\")))));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/48",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // remove_vowels is a function that takes string and returns string without vowels.\n    // >>> removeVowels((\"\"))\n    // (\"\")\n    // >>> removeVowels((\"abcdef\"))\n    // (\"bcdf\")\n    // >>> removeVowels((\"aaaaa\"))\n    // (\"\")\n    // >>> removeVowels((\"aaBAA\"))\n    // (\"B\")\n    // >>> removeVowels((\"zbcd\"))\n    // (\"zbcd\")\n    public static String removeVowels(String text) {\n    }\n    public static void main(String[] args) {\n    assert(removeVowels((\"\")).equals((\"\")));\n    assert(removeVowels((\"abcdef\\nghijklm\")).equals((\"bcdf\\nghjklm\")));\n    assert(removeVowels((\"fedcba\")).equals((\"fdcb\")));\n    assert(removeVowels((\"eeeee\")).equals((\"\")));\n    assert(removeVowels((\"acBAA\")).equals((\"cB\")));\n    assert(removeVowels((\"EcBOO\")).equals((\"cB\")));\n    assert(removeVowels((\"ybcd\")).equals((\"ybcd\")));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(removeVowels((\"\")).equals((\"\")));\n    assert(removeVowels((\"abcdef\\nghijklm\")).equals((\"bcdf\\nghjklm\")));\n    assert(removeVowels((\"fedcba\")).equals((\"fdcb\")));\n    assert(removeVowels((\"eeeee\")).equals((\"\")));\n    assert(removeVowels((\"acBAA\")).equals((\"cB\")));\n    assert(removeVowels((\"EcBOO\")).equals((\"cB\")));\n    assert(removeVowels((\"ybcd\")).equals((\"ybcd\")));\n    }\n\n}\n"
+    ],
+    "description": "    remove_vowels is a function that takes string and returns string without vowels.\n    >>> remove_vowels('')\n    ''\n    >>> remove_vowels(\"abcdef\nghijklm\")\n    'bcdf\nghjklm'\n    >>> remove_vowels('abcdef')\n    'bcdf'\n    >>> remove_vowels('aaaaa')\n    ''\n    >>> remove_vowels('aaBAA')\n    'B'\n    >>> remove_vowels('zbcd')\n    'zbcd'\n    ",
+    "metadata": {
+      "libs": [],
+      "params": "text",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='remove_vowels',\n      args=arguments(\n        args=[\n          arg(arg='text')]),\n      body=[\n        Return(\n          value=Call(\n            func=Attribute(\n              value=Constant(value=''),\n              attr='join',\n              ctx=Load()),\n            args=[\n              ListComp(\n                elt=Name(id='s', ctx=Load()),\n                generators=[\n                  comprehension(\n                    target=Name(id='s', ctx=Store()),\n                    iter=Name(id='text', ctx=Load()),\n                    ifs=[\n                      Compare(\n                        left=Call(\n                          func=Attribute(\n                            value=Name(id='s', ctx=Load()),\n                            attr='lower',\n                            ctx=Load())),\n                        ops=[\n                          NotIn()],\n                        comparators=[\n                          List(\n                            elts=[\n                              Constant(value='a'),\n                              Constant(value='e'),\n                              Constant(value='i'),\n                              Constant(value='o'),\n                              Constant(value='u')],\n                            ctx=Load())])],\n                    is_async=0)])]))])])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // remove_vowels is a function that takes string and returns string without vowels.\n    // >>> removeVowels((\"\"))\n    // (\"\")\n    // >>> removeVowels((\"abcdef\"))\n    // (\"bcdf\")\n    // >>> removeVowels((\"aaaaa\"))\n    // (\"\")\n    // >>> removeVowels((\"aaBAA\"))\n    // (\"B\")\n    // >>> removeVowels((\"zbcd\"))\n    // (\"zbcd\")\n    public static String removeVowels(String text) {\nreturn Arrays.stream(text.split(\"\"))\n                 .filter(c -> !\"AEIOUaeiou\".contains(c))\n                 .collect(Collectors.joining());\n    }\n    public static void main(String[] args) {\n    assert(removeVowels((\"\")).equals((\"\")));\n    assert(removeVowels((\"abcdef\\nghijklm\")).equals((\"bcdf\\nghjklm\")));\n    assert(removeVowels((\"fedcba\")).equals((\"fdcb\")));\n    assert(removeVowels((\"eeeee\")).equals((\"\")));\n    assert(removeVowels((\"acBAA\")).equals((\"cB\")));\n    assert(removeVowels((\"EcBOO\")).equals((\"cB\")));\n    assert(removeVowels((\"ybcd\")).equals((\"ybcd\")));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/36",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // This function takes an array array list l and returns an array array list l' such that\n    // l' is identical to l in the odd indicies, while its values at the even indicies are equal\n    // to the values of the even indicies of l, but sorted.\n    // >>> sortEven((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l))))\n    // (new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l)))\n    // >>> sortEven((new ArrayList<Long>(Arrays.asList((long)5l, (long)6l, (long)3l, (long)4l))))\n    // (new ArrayList<Long>(Arrays.asList((long)3l, (long)6l, (long)5l, (long)4l)))\n    public static ArrayList<Long> sortEven(ArrayList<Long> l) {\n    }\n    public static void main(String[] args) {\n    assert(sortEven((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l)))));\n    assert(sortEven((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)9l, (long)0l, (long)123l, (long)1l, (long)-10l)))).equals((new ArrayList<Long>(Arrays.asList((long)-10l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)5l, (long)0l, (long)9l, (long)1l, (long)123l)))));\n    assert(sortEven((new ArrayList<Long>(Arrays.asList((long)5l, (long)8l, (long)-12l, (long)4l, (long)23l, (long)2l, (long)3l, (long)11l, (long)12l, (long)-10l)))).equals((new ArrayList<Long>(Arrays.asList((long)-12l, (long)8l, (long)3l, (long)4l, (long)5l, (long)2l, (long)12l, (long)11l, (long)23l, (long)-10l)))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(sortEven((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l)))));\n    assert(sortEven((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)9l, (long)0l, (long)123l, (long)1l, (long)-10l)))).equals((new ArrayList<Long>(Arrays.asList((long)-10l, (long)3l, (long)-5l, (long)2l, (long)-3l, (long)3l, (long)5l, (long)0l, (long)9l, (long)1l, (long)123l)))));\n    assert(sortEven((new ArrayList<Long>(Arrays.asList((long)5l, (long)8l, (long)-12l, (long)4l, (long)23l, (long)2l, (long)3l, (long)11l, (long)12l, (long)-10l)))).equals((new ArrayList<Long>(Arrays.asList((long)-12l, (long)8l, (long)3l, (long)4l, (long)5l, (long)2l, (long)12l, (long)11l, (long)23l, (long)-10l)))));\n    }\n\n}\n"
+    ],
+    "description": "This function takes a list l and returns a list l' such that\nl' is identical to l in the odd indicies, while its values at the even indicies are equal\nto the values of the even indicies of l, but sorted.\n>>> sort_even([1, 2, 3])\n[1, 2, 3]\n>>> sort_even([5, 6, 3, 4])\n[3, 6, 5, 4]",
+    "metadata": {
+      "libs": [],
+      "params": "l: list",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='sort_even',\n      args=arguments(\n        args=[\n          arg(\n            arg='l',\n            annotation=Name(id='list', ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='evens', ctx=Store())],\n          value=Subscript(\n            value=Name(id='l', ctx=Load()),\n            slice=Slice(\n              step=Constant(value=2)),\n            ctx=Load())),\n        Assign(\n          targets=[\n            Name(id='odds', ctx=Store())],\n          value=Subscript(\n            value=Name(id='l', ctx=Load()),\n            slice=Slice(\n              lower=Constant(value=1),\n              step=Constant(value=2)),\n            ctx=Load())),\n        Expr(\n          value=Call(\n            func=Attribute(\n              value=Name(id='evens', ctx=Load()),\n              attr='sort',\n              ctx=Load()))),\n        Assign(\n          targets=[\n            Name(id='ans', ctx=Store())],\n          value=List(ctx=Load())),\n        For(\n          target=Tuple(\n            elts=[\n              Name(id='e', ctx=Store()),\n              Name(id='o', ctx=Store())],\n            ctx=Store()),\n          iter=Call(\n            func=Name(id='zip', ctx=Load()),\n            args=[\n              Name(id='evens', ctx=Load()),\n              Name(id='odds', ctx=Load())]),\n          body=[\n            Expr(\n              value=Call(\n                func=Attribute(\n                  value=Name(id='ans', ctx=Load()),\n                  attr='extend',\n                  ctx=Load()),\n                args=[\n                  List(\n                    elts=[\n                      Name(id='e', ctx=Load()),\n                      Name(id='o', ctx=Load())],\n                    ctx=Load())]))]),\n        If(\n          test=Compare(\n            left=Call(\n              func=Name(id='len', ctx=Load()),\n              args=[\n                Name(id='evens', ctx=Load())]),\n            ops=[\n              Gt()],\n            comparators=[\n              Call(\n                func=Name(id='len', ctx=Load()),\n                args=[\n                  Name(id='odds', ctx=Load())])]),\n          body=[\n            Expr(\n              value=Call(\n                func=Attribute(\n                  value=Name(id='ans', ctx=Load()),\n                  attr='append',\n                  ctx=Load()),\n                args=[\n                  Subscript(\n                    value=Name(id='evens', ctx=Load()),\n                    slice=UnaryOp(\n                      op=USub(),\n                      operand=Constant(value=1)),\n                    ctx=Load())]))]),\n        Return(\n          value=Name(id='ans', ctx=Load()))])])"
+    },
+    "clones": []
+  },
+  {
+    "id": "HumanEval/15",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    // >>> stringSequence((0l))\n    // (\"0\")\n    // >>> stringSequence((5l))\n    // (\"0 1 2 3 4 5\")\n    public static String stringSequence(long n) {\n    }\n    public static void main(String[] args) {\n    assert(stringSequence((0l)).equals((\"0\")));\n    assert(stringSequence((3l)).equals((\"0 1 2 3\")));\n    assert(stringSequence((10l)).equals((\"0 1 2 3 4 5 6 7 8 9 10\")));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(stringSequence((0l)).equals((\"0\")));\n    assert(stringSequence((3l)).equals((\"0 1 2 3\")));\n    assert(stringSequence((10l)).equals((\"0 1 2 3 4 5 6 7 8 9 10\")));\n    }\n\n}\n"
+    ],
+    "description": "Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n>>> string_sequence(0)\n'0'\n>>> string_sequence(5)\n'0 1 2 3 4 5'",
+    "metadata": {
+      "libs": [],
+      "params": "n: int",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='string_sequence',\n      args=arguments(\n        args=[\n          arg(\n            arg='n',\n            annotation=Name(id='int', ctx=Load()))]),\n      body=[\n        Return(\n          value=Call(\n            func=Attribute(\n              value=Constant(value=' '),\n              attr='join',\n              ctx=Load()),\n            args=[\n              ListComp(\n                elt=Call(\n                  func=Name(id='str', ctx=Load()),\n                  args=[\n                    Name(id='x', ctx=Load())]),\n                generators=[\n                  comprehension(\n                    target=Name(id='x', ctx=Store()),\n                    iter=Call(\n                      func=Name(id='range', ctx=Load()),\n                      args=[\n                        BinOp(\n                          left=Name(id='n', ctx=Load()),\n                          op=Add(),\n                          right=Constant(value=1))]),\n                    is_async=0)])]))],\n      returns=Name(id='str', ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return a string containing space-delimited numbers starting from 0 upto n inclusive.\n    // >>> stringSequence((0l))\n    // (\"0\")\n    // >>> stringSequence((5l))\n    // (\"0 1 2 3 4 5\")\n    public static String stringSequence(long n) {\nStringBuilder sb = new StringBuilder();\n    for (long i = 0; i <= n; i++) {\n        sb.append(i).append(\" \");\n    }\n    return sb.toString().trim(); // Remove the trailing space\n    }\n    public static void main(String[] args) {\n    assert(stringSequence((0l)).equals((\"0\")));\n    assert(stringSequence((3l)).equals((\"0 1 2 3\")));\n    assert(stringSequence((10l)).equals((\"0 1 2 3 4 5 6 7 8 9 10\")));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/9",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // From a given array list of integers, generate an array array list of rolling maximum element found until given moment\n    // in the sequence.\n    // >>> rollingMax((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)2l, (long)3l, (long)4l, (long)2l))))\n    // (new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)3l, (long)3l, (long)4l, (long)4l)))\n    public static ArrayList<Long> rollingMax(ArrayList<Long> numbers) {\n    }\n    public static void main(String[] args) {\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))));\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList((long)4l, (long)3l, (long)2l, (long)1l)))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)4l, (long)4l, (long)4l)))));\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList((long)3l, (long)2l, (long)3l, (long)100l, (long)3l)))).equals((new ArrayList<Long>(Arrays.asList((long)3l, (long)3l, (long)3l, (long)100l, (long)100l)))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))));\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList((long)4l, (long)3l, (long)2l, (long)1l)))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)4l, (long)4l, (long)4l)))));\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList((long)3l, (long)2l, (long)3l, (long)100l, (long)3l)))).equals((new ArrayList<Long>(Arrays.asList((long)3l, (long)3l, (long)3l, (long)100l, (long)100l)))));\n    }\n\n}\n"
+    ],
+    "description": "From a given list of integers, generate a list of rolling maximum element found until given moment\nin the sequence.\n>>> rolling_max([1, 2, 3, 2, 3, 4, 2])\n[1, 2, 3, 3, 3, 4, 4]",
+    "metadata": {
+      "libs": [],
+      "params": "numbers: List[int]",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List'),\n        alias(name='Tuple')],\n      level=0),\n    FunctionDef(\n      name='rolling_max',\n      args=arguments(\n        args=[\n          arg(\n            arg='numbers',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='int', ctx=Load()),\n              ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='running_max', ctx=Store())],\n          value=Constant(value=None)),\n        Assign(\n          targets=[\n            Name(id='result', ctx=Store())],\n          value=List(ctx=Load())),\n        For(\n          target=Name(id='n', ctx=Store()),\n          iter=Name(id='numbers', ctx=Load()),\n          body=[\n            If(\n              test=Compare(\n                left=Name(id='running_max', ctx=Load()),\n                ops=[\n                  Is()],\n                comparators=[\n                  Constant(value=None)]),\n              body=[\n                Assign(\n                  targets=[\n                    Name(id='running_max', ctx=Store())],\n                  value=Name(id='n', ctx=Load()))],\n              orelse=[\n                Assign(\n                  targets=[\n                    Name(id='running_max', ctx=Store())],\n                  value=Call(\n                    func=Name(id='max', ctx=Load()),\n                    args=[\n                      Name(id='running_max', ctx=Load()),\n                      Name(id='n', ctx=Load())]))]),\n            Expr(\n              value=Call(\n                func=Attribute(\n                  value=Name(id='result', ctx=Load()),\n                  attr='append',\n                  ctx=Load()),\n                args=[\n                  Name(id='running_max', ctx=Load())]))]),\n        Return(\n          value=Name(id='result', ctx=Load()))],\n      returns=Subscript(\n        value=Name(id='List', ctx=Load()),\n        slice=Name(id='int', ctx=Load()),\n        ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // From a given array list of integers, generate an array array list of rolling maximum element found until given moment\n    // in the sequence.\n    // >>> rollingMax((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)2l, (long)3l, (long)4l, (long)2l))))\n    // (new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)3l, (long)3l, (long)4l, (long)4l)))\n    public static ArrayList<Long> rollingMax(ArrayList<Long> numbers) {\nArrayList<Long> result = new ArrayList<>();\n    if (numbers.isEmpty()) {\n        return result;\n    }\n    \n    Long maxSoFar = numbers.get(0);\n    for (Long number : numbers) {\n        maxSoFar = Math.max(maxSoFar, number);\n        result.add(maxSoFar);\n    }\n    \n    return result;\n    }\n    public static void main(String[] args) {\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))).equals((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l)))));\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList((long)4l, (long)3l, (long)2l, (long)1l)))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)4l, (long)4l, (long)4l)))));\n    assert(rollingMax((new ArrayList<Long>(Arrays.asList((long)3l, (long)2l, (long)3l, (long)100l, (long)3l)))).equals((new ArrayList<Long>(Arrays.asList((long)3l, (long)3l, (long)3l, (long)100l, (long)100l)))));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/40",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return array list with elements incremented by 1.\n    // >>> incrList((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l))))\n    // (new ArrayList<Long>(Arrays.asList((long)2l, (long)3l, (long)4l)))\n    // >>> incrList((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l))))\n    // (new ArrayList<Long>(Arrays.asList((long)6l, (long)4l, (long)6l, (long)3l, (long)4l, (long)4l, (long)10l, (long)1l, (long)124l)))\n    public static ArrayList<Long> incrList(ArrayList<Long> l) {\n    }\n    public static void main(String[] args) {\n    assert(incrList((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(incrList((new ArrayList<Long>(Arrays.asList((long)3l, (long)2l, (long)1l)))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)3l, (long)2l)))));\n    assert(incrList((new ArrayList<Long>(Arrays.asList((long)5l, (long)2l, (long)5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l)))).equals((new ArrayList<Long>(Arrays.asList((long)6l, (long)3l, (long)6l, (long)3l, (long)4l, (long)4l, (long)10l, (long)1l, (long)124l)))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(incrList((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(incrList((new ArrayList<Long>(Arrays.asList((long)3l, (long)2l, (long)1l)))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)3l, (long)2l)))));\n    assert(incrList((new ArrayList<Long>(Arrays.asList((long)5l, (long)2l, (long)5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l)))).equals((new ArrayList<Long>(Arrays.asList((long)6l, (long)3l, (long)6l, (long)3l, (long)4l, (long)4l, (long)10l, (long)1l, (long)124l)))));\n    }\n\n}\n"
+    ],
+    "description": "Return list with elements incremented by 1.\n>>> incr_list([1, 2, 3])\n[2, 3, 4]\n>>> incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123])\n[6, 4, 6, 3, 4, 4, 10, 1, 124]",
+    "metadata": {
+      "libs": [],
+      "params": "l: list",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='incr_list',\n      args=arguments(\n        args=[\n          arg(\n            arg='l',\n            annotation=Name(id='list', ctx=Load()))]),\n      body=[\n        Return(\n          value=ListComp(\n            elt=BinOp(\n              left=Name(id='e', ctx=Load()),\n              op=Add(),\n              right=Constant(value=1)),\n            generators=[\n              comprehension(\n                target=Name(id='e', ctx=Store()),\n                iter=Name(id='l', ctx=Load()),\n                is_async=0)]))])])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return array list with elements incremented by 1.\n    // >>> incrList((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l))))\n    // (new ArrayList<Long>(Arrays.asList((long)2l, (long)3l, (long)4l)))\n    // >>> incrList((new ArrayList<Long>(Arrays.asList((long)5l, (long)3l, (long)5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l))))\n    // (new ArrayList<Long>(Arrays.asList((long)6l, (long)4l, (long)6l, (long)3l, (long)4l, (long)4l, (long)10l, (long)1l, (long)124l)))\n    public static ArrayList<Long> incrList(ArrayList<Long> l) {\nreturn l.stream().map(x -> x + 1).collect(Collectors.toCollection(ArrayList::new));\n    }\n    public static void main(String[] args) {\n    assert(incrList((new ArrayList<Long>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(incrList((new ArrayList<Long>(Arrays.asList((long)3l, (long)2l, (long)1l)))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)3l, (long)2l)))));\n    assert(incrList((new ArrayList<Long>(Arrays.asList((long)5l, (long)2l, (long)5l, (long)2l, (long)3l, (long)3l, (long)9l, (long)0l, (long)123l)))).equals((new ArrayList<Long>(Arrays.asList((long)6l, (long)3l, (long)6l, (long)3l, (long)4l, (long)4l, (long)10l, (long)1l, (long)124l)))));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/20",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // From a supplied array list of numbers (of length at least two) select and return two that are the closest to each\n    // other and return them in order (smaller number, larger number).\n    // >>> findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.2f))))\n    // (Pair.with(2.0f, 2.2f))\n    // >>> findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.0f))))\n    // (Pair.with(2.0f, 2.0f))\n    public static Pair<Float, Float> findClosestElements(ArrayList<Float> numbers) {\n    }\n    public static void main(String[] args) {\n    assert(findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.9f, (float)4.0f, (float)5.0f, (float)2.2f)))).equals((Pair.with(3.9f, 4.0f))));\n    assert(findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)5.9f, (float)4.0f, (float)5.0f)))).equals((Pair.with(5.0f, 5.9f))));\n    assert(findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.2f)))).equals((Pair.with(2.0f, 2.2f))));\n    assert(findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.0f)))).equals((Pair.with(2.0f, 2.0f))));\n    assert(findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.1f, (float)2.2f, (float)3.1f, (float)4.1f, (float)5.1f)))).equals((Pair.with(2.2f, 3.1f))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.9f, (float)4.0f, (float)5.0f, (float)2.2f)))).equals((Pair.with(3.9f, 4.0f))));\n    assert(findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)5.9f, (float)4.0f, (float)5.0f)))).equals((Pair.with(5.0f, 5.9f))));\n    assert(findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.2f)))).equals((Pair.with(2.0f, 2.2f))));\n    assert(findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.0f)))).equals((Pair.with(2.0f, 2.0f))));\n    assert(findClosestElements((new ArrayList<Float>(Arrays.asList((float)1.1f, (float)2.2f, (float)3.1f, (float)4.1f, (float)5.1f)))).equals((Pair.with(2.2f, 3.1f))));\n    }\n\n}\n"
+    ],
+    "description": "From a supplied list of numbers (of length at least two) select and return two that are the closest to each\nother and return them in order (smaller number, larger number).\n>>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])\n(2.0, 2.2)\n>>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n(2.0, 2.0)",
+    "metadata": {
+      "libs": [],
+      "params": "numbers: List[float]",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List'),\n        alias(name='Tuple')],\n      level=0),\n    FunctionDef(\n      name='find_closest_elements',\n      args=arguments(\n        args=[\n          arg(\n            arg='numbers',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='float', ctx=Load()),\n              ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='closest_pair', ctx=Store())],\n          value=Constant(value=None)),\n        Assign(\n          targets=[\n            Name(id='distance', ctx=Store())],\n          value=Constant(value=None)),\n        For(\n          target=Tuple(\n            elts=[\n              Name(id='idx', ctx=Store()),\n              Name(id='elem', ctx=Store())],\n            ctx=Store()),\n          iter=Call(\n            func=Name(id='enumerate', ctx=Load()),\n            args=[\n              Name(id='numbers', ctx=Load())]),\n          body=[\n            For(\n              target=Tuple(\n                elts=[\n                  Name(id='idx2', ctx=Store()),\n                  Name(id='elem2', ctx=Store())],\n                ctx=Store()),\n              iter=Call(\n                func=Name(id='enumerate', ctx=Load()),\n                args=[\n                  Name(id='numbers', ctx=Load())]),\n              body=[\n                If(\n                  test=Compare(\n                    left=Name(id='idx', ctx=Load()),\n                    ops=[\n                      NotEq()],\n                    comparators=[\n                      Name(id='idx2', ctx=Load())]),\n                  body=[\n                    If(\n                      test=Compare(\n                        left=Name(id='distance', ctx=Load()),\n                        ops=[\n                          Is()],\n                        comparators=[\n                          Constant(value=None)]),\n                      body=[\n                        Assign(\n                          targets=[\n                            Name(id='distance', ctx=Store())],\n                          value=Call(\n                            func=Name(id='abs', ctx=Load()),\n                            args=[\n                              BinOp(\n                                left=Name(id='elem', ctx=Load()),\n                                op=Sub(),\n                                right=Name(id='elem2', ctx=Load()))])),\n                        Assign(\n                          targets=[\n                            Name(id='closest_pair', ctx=Store())],\n                          value=Call(\n                            func=Name(id='tuple', ctx=Load()),\n                            args=[\n                              Call(\n                                func=Name(id='sorted', ctx=Load()),\n                                args=[\n                                  List(\n                                    elts=[\n                                      Name(id='elem', ctx=Load()),\n                                      Name(id='elem2', ctx=Load())],\n                                    ctx=Load())])]))],\n                      orelse=[\n                        Assign(\n                          targets=[\n                            Name(id='new_distance', ctx=Store())],\n                          value=Call(\n                            func=Name(id='abs', ctx=Load()),\n                            args=[\n                              BinOp(\n                                left=Name(id='elem', ctx=Load()),\n                                op=Sub(),\n                                right=Name(id='elem2', ctx=Load()))])),\n                        If(\n                          test=Compare(\n                            left=Name(id='new_distance', ctx=Load()),\n                            ops=[\n                              Lt()],\n                            comparators=[\n                              Name(id='distance', ctx=Load())]),\n                          body=[\n                            Assign(\n                              targets=[\n                                Name(id='distance', ctx=Store())],\n                              value=Name(id='new_distance', ctx=Load())),\n                            Assign(\n                              targets=[\n                                Name(id='closest_pair', ctx=Store())],\n                              value=Call(\n                                func=Name(id='tuple', ctx=Load()),\n                                args=[\n                                  Call(\n                                    func=Name(id='sorted', ctx=Load()),\n                                    args=[\n                                      List(\n                                        elts=[\n                                          Name(id='elem', ctx=Load()),\n                                          Name(id='elem2', ctx=Load())],\n                                        ctx=Load())])]))])])])])]),\n        Return(\n          value=Name(id='closest_pair', ctx=Load()))],\n      returns=Subscript(\n        value=Name(id='Tuple', ctx=Load()),\n        slice=Tuple(\n          elts=[\n            Name(id='float', ctx=Load()),\n            Name(id='float', ctx=Load())],\n          ctx=Load()),\n        ctx=Load()))])"
+    },
+    "clones": []
+  },
+  {
+    "id": "HumanEval/11",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Input are two strings a and b consisting only of 1s and 0s.\n    // Perform binary XOR on these inputs and return result also as a string.\n    // >>> stringXor((\"010\"), (\"110\"))\n    // (\"100\")\n    public static String stringXor(String a, String b) {\n    }\n    public static void main(String[] args) {\n    assert(stringXor((\"111000\"), (\"101010\")).equals((\"010010\")));\n    assert(stringXor((\"1\"), (\"1\")).equals((\"0\")));\n    assert(stringXor((\"0101\"), (\"0000\")).equals((\"0101\")));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(stringXor((\"111000\"), (\"101010\")).equals((\"010010\")));\n    assert(stringXor((\"1\"), (\"1\")).equals((\"0\")));\n    assert(stringXor((\"0101\"), (\"0000\")).equals((\"0101\")));\n    }\n\n}\n"
+    ],
+    "description": "Input are two strings a and b consisting only of 1s and 0s.\nPerform binary XOR on these inputs and return result also as a string.\n>>> string_xor('010', '110')\n'100'",
+    "metadata": {
+      "libs": [],
+      "params": "a: str, b: str",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List')],\n      level=0),\n    FunctionDef(\n      name='string_xor',\n      args=arguments(\n        args=[\n          arg(\n            arg='a',\n            annotation=Name(id='str', ctx=Load())),\n          arg(\n            arg='b',\n            annotation=Name(id='str', ctx=Load()))]),\n      body=[\n        FunctionDef(\n          name='xor',\n          args=arguments(\n            args=[\n              arg(arg='i'),\n              arg(arg='j')]),\n          body=[\n            If(\n              test=Compare(\n                left=Name(id='i', ctx=Load()),\n                ops=[\n                  Eq()],\n                comparators=[\n                  Name(id='j', ctx=Load())]),\n              body=[\n                Return(\n                  value=Constant(value='0'))],\n              orelse=[\n                Return(\n                  value=Constant(value='1'))])]),\n        Return(\n          value=Call(\n            func=Attribute(\n              value=Constant(value=''),\n              attr='join',\n              ctx=Load()),\n            args=[\n              GeneratorExp(\n                elt=Call(\n                  func=Name(id='xor', ctx=Load()),\n                  args=[\n                    Name(id='x', ctx=Load()),\n                    Name(id='y', ctx=Load())]),\n                generators=[\n                  comprehension(\n                    target=Tuple(\n                      elts=[\n                        Name(id='x', ctx=Store()),\n                        Name(id='y', ctx=Store())],\n                      ctx=Store()),\n                    iter=Call(\n                      func=Name(id='zip', ctx=Load()),\n                      args=[\n                        Name(id='a', ctx=Load()),\n                        Name(id='b', ctx=Load())]),\n                    is_async=0)])]))],\n      returns=Name(id='str', ctx=Load()))])"
+    },
+    "clones": []
+  },
+  {
+    "id": "HumanEval/8",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // For a given array list of integers, return a pair consisting of a sum and a product of all the integers in an array array list.\n    // Empty sum should be equal to 0 and empty product should be equal to 1.\n    // >>> sumProduct((new ArrayList<Long>(Arrays.asList())))\n    // (Pair.with(0l, 1l))\n    // >>> sumProduct((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l, (long)4l))))\n    // (Pair.with(10l, 24l))\n    public static Pair<Long, Long> sumProduct(ArrayList<Long> numbers) {\n    }\n    public static void main(String[] args) {\n    assert(sumProduct((new ArrayList<Long>(Arrays.asList()))).equals((Pair.with(0l, 1l))));\n    assert(sumProduct((new ArrayList<Long>(Arrays.asList((long)1l, (long)1l, (long)1l)))).equals((Pair.with(3l, 1l))));\n    assert(sumProduct((new ArrayList<Long>(Arrays.asList((long)100l, (long)0l)))).equals((Pair.with(100l, 0l))));\n    assert(sumProduct((new ArrayList<Long>(Arrays.asList((long)3l, (long)5l, (long)7l)))).equals((Pair.with(15l, 105l))));\n    assert(sumProduct((new ArrayList<Long>(Arrays.asList((long)10l)))).equals((Pair.with(10l, 10l))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(sumProduct((new ArrayList<Long>(Arrays.asList()))).equals((Pair.with(0l, 1l))));\n    assert(sumProduct((new ArrayList<Long>(Arrays.asList((long)1l, (long)1l, (long)1l)))).equals((Pair.with(3l, 1l))));\n    assert(sumProduct((new ArrayList<Long>(Arrays.asList((long)100l, (long)0l)))).equals((Pair.with(100l, 0l))));\n    assert(sumProduct((new ArrayList<Long>(Arrays.asList((long)3l, (long)5l, (long)7l)))).equals((Pair.with(15l, 105l))));\n    assert(sumProduct((new ArrayList<Long>(Arrays.asList((long)10l)))).equals((Pair.with(10l, 10l))));\n    }\n\n}\n"
+    ],
+    "description": "For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\nEmpty sum should be equal to 0 and empty product should be equal to 1.\n>>> sum_product([])\n(0, 1)\n>>> sum_product([1, 2, 3, 4])\n(10, 24)",
+    "metadata": {
+      "libs": [],
+      "params": "numbers: List[int]",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List'),\n        alias(name='Tuple')],\n      level=0),\n    FunctionDef(\n      name='sum_product',\n      args=arguments(\n        args=[\n          arg(\n            arg='numbers',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='int', ctx=Load()),\n              ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='sum_value', ctx=Store())],\n          value=Constant(value=0)),\n        Assign(\n          targets=[\n            Name(id='prod_value', ctx=Store())],\n          value=Constant(value=1)),\n        For(\n          target=Name(id='n', ctx=Store()),\n          iter=Name(id='numbers', ctx=Load()),\n          body=[\n            AugAssign(\n              target=Name(id='sum_value', ctx=Store()),\n              op=Add(),\n              value=Name(id='n', ctx=Load())),\n            AugAssign(\n              target=Name(id='prod_value', ctx=Store()),\n              op=Mult(),\n              value=Name(id='n', ctx=Load()))]),\n        Return(\n          value=Tuple(\n            elts=[\n              Name(id='sum_value', ctx=Load()),\n              Name(id='prod_value', ctx=Load())],\n            ctx=Load()))],\n      returns=Subscript(\n        value=Name(id='Tuple', ctx=Load()),\n        slice=Tuple(\n          elts=[\n            Name(id='int', ctx=Load()),\n            Name(id='int', ctx=Load())],\n          ctx=Load()),\n        ctx=Load()))])"
+    },
+    "clones": []
+  },
+  {
+    "id": "HumanEval/13",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return a greatest common divisor of two integers a and b\n    // >>> greatestCommonDivisor((3l), (5l))\n    // (1l)\n    // >>> greatestCommonDivisor((25l), (15l))\n    // (5l)\n    public static long greatestCommonDivisor(long a, long b) {\n    }\n    public static void main(String[] args) {\n    assert(greatestCommonDivisor((3l), (7l)) == (1l));\n    assert(greatestCommonDivisor((10l), (15l)) == (5l));\n    assert(greatestCommonDivisor((49l), (14l)) == (7l));\n    assert(greatestCommonDivisor((144l), (60l)) == (12l));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(greatestCommonDivisor((3l), (7l)) == (1l));\n    assert(greatestCommonDivisor((10l), (15l)) == (5l));\n    assert(greatestCommonDivisor((49l), (14l)) == (7l));\n    assert(greatestCommonDivisor((144l), (60l)) == (12l));\n    }\n\n}\n"
+    ],
+    "description": "Return a greatest common divisor of two integers a and b\n>>> greatest_common_divisor(3, 5)\n1\n>>> greatest_common_divisor(25, 15)\n5",
+    "metadata": {
+      "libs": [],
+      "params": "a: int, b: int",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='greatest_common_divisor',\n      args=arguments(\n        args=[\n          arg(\n            arg='a',\n            annotation=Name(id='int', ctx=Load())),\n          arg(\n            arg='b',\n            annotation=Name(id='int', ctx=Load()))]),\n      body=[\n        While(\n          test=Name(id='b', ctx=Load()),\n          body=[\n            Assign(\n              targets=[\n                Tuple(\n                  elts=[\n                    Name(id='a', ctx=Store()),\n                    Name(id='b', ctx=Store())],\n                  ctx=Store())],\n              value=Tuple(\n                elts=[\n                  Name(id='b', ctx=Load()),\n                  BinOp(\n                    left=Name(id='a', ctx=Load()),\n                    op=Mod(),\n                    right=Name(id='b', ctx=Load()))],\n                ctx=Load()))]),\n        Return(\n          value=Name(id='a', ctx=Load()))],\n      returns=Name(id='int', ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "gemma3:latest",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot gemma3:latest-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return a greatest common divisor of two integers a and b\n    // >>> greatestCommonDivisor((3l), (5l))\n    // (1l)\n    // >>> greatestCommonDivisor((25l), (15l))\n    // (5l)\n    public static long greatestCommonDivisor(long a, long b) {\nif (b == 0) {\n            return a;\n        }\n        return greatestCommonDivisor(b, a % b);\n    }\n    public static void main(String[] args) {\n    assert(greatestCommonDivisor((3l), (7l)) == (1l));\n    assert(greatestCommonDivisor((10l), (15l)) == (5l));\n    assert(greatestCommonDivisor((49l), (14l)) == (7l));\n    assert(greatestCommonDivisor((144l), (60l)) == (12l));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/45",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return median of elements in the array list l.\n    // >>> median((new ArrayList<Long>(Arrays.asList((long)3l, (long)1l, (long)2l, (long)4l, (long)5l))))\n    // (float)3l\n    // >>> median((new ArrayList<Long>(Arrays.asList((long)-10l, (long)4l, (long)6l, (long)1000l, (long)10l, (long)20l))))\n    // (15.0f)\n    public static float median(ArrayList<Long> l) {\n    }\n    public static void main(String[] args) {\n    assert(median((new ArrayList<Long>(Arrays.asList((long)3l, (long)1l, (long)2l, (long)4l, (long)5l)))) == (float)3l);\n    assert(median((new ArrayList<Long>(Arrays.asList((long)-10l, (long)4l, (long)6l, (long)1000l, (long)10l, (long)20l)))) == (8.0f));\n    assert(median((new ArrayList<Long>(Arrays.asList((long)5l)))) == (float)5l);\n    assert(median((new ArrayList<Long>(Arrays.asList((long)6l, (long)5l)))) == (5.5f));\n    assert(median((new ArrayList<Long>(Arrays.asList((long)8l, (long)1l, (long)3l, (long)9l, (long)9l, (long)2l, (long)7l)))) == (float)7l);\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(median((new ArrayList<Long>(Arrays.asList((long)3l, (long)1l, (long)2l, (long)4l, (long)5l)))) == (float)3l);\n    assert(median((new ArrayList<Long>(Arrays.asList((long)-10l, (long)4l, (long)6l, (long)1000l, (long)10l, (long)20l)))) == (8.0f));\n    assert(median((new ArrayList<Long>(Arrays.asList((long)5l)))) == (float)5l);\n    assert(median((new ArrayList<Long>(Arrays.asList((long)6l, (long)5l)))) == (5.5f));\n    assert(median((new ArrayList<Long>(Arrays.asList((long)8l, (long)1l, (long)3l, (long)9l, (long)9l, (long)2l, (long)7l)))) == (float)7l);\n    }\n\n}\n"
+    ],
+    "description": "Return median of elements in the list l.\n>>> median([3, 1, 2, 4, 5])\n3\n>>> median([-10, 4, 6, 1000, 10, 20])\n15.0",
+    "metadata": {
+      "libs": [],
+      "params": "l: list",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='median',\n      args=arguments(\n        args=[\n          arg(\n            arg='l',\n            annotation=Name(id='list', ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='l', ctx=Store())],\n          value=Call(\n            func=Name(id='sorted', ctx=Load()),\n            args=[\n              Name(id='l', ctx=Load())])),\n        If(\n          test=Compare(\n            left=BinOp(\n              left=Call(\n                func=Name(id='len', ctx=Load()),\n                args=[\n                  Name(id='l', ctx=Load())]),\n              op=Mod(),\n              right=Constant(value=2)),\n            ops=[\n              Eq()],\n            comparators=[\n              Constant(value=1)]),\n          body=[\n            Return(\n              value=Subscript(\n                value=Name(id='l', ctx=Load()),\n                slice=BinOp(\n                  left=Call(\n                    func=Name(id='len', ctx=Load()),\n                    args=[\n                      Name(id='l', ctx=Load())]),\n                  op=FloorDiv(),\n                  right=Constant(value=2)),\n                ctx=Load()))],\n          orelse=[\n            Return(\n              value=BinOp(\n                left=BinOp(\n                  left=Subscript(\n                    value=Name(id='l', ctx=Load()),\n                    slice=BinOp(\n                      left=BinOp(\n                        left=Call(\n                          func=Name(id='len', ctx=Load()),\n                          args=[\n                            Name(id='l', ctx=Load())]),\n                        op=FloorDiv(),\n                        right=Constant(value=2)),\n                      op=Sub(),\n                      right=Constant(value=1)),\n                    ctx=Load()),\n                  op=Add(),\n                  right=Subscript(\n                    value=Name(id='l', ctx=Load()),\n                    slice=BinOp(\n                      left=Call(\n                        func=Name(id='len', ctx=Load()),\n                        args=[\n                          Name(id='l', ctx=Load())]),\n                      op=FloorDiv(),\n                      right=Constant(value=2)),\n                    ctx=Load())),\n                op=Div(),\n                right=Constant(value=2.0)))])])])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Return median of elements in the array list l.\n    // >>> median((new ArrayList<Long>(Arrays.asList((long)3l, (long)1l, (long)2l, (long)4l, (long)5l))))\n    // (float)3l\n    // >>> median((new ArrayList<Long>(Arrays.asList((long)-10l, (long)4l, (long)6l, (long)1000l, (long)10l, (long)20l))))\n    // (15.0f)\n    public static float median(ArrayList<Long> l) {\nCollections.sort(l);\n        int size = l.size();\n        if (size % 2 == 0) {\n            return (l.get(size / 2 - 1) + l.get(size / 2)) / 2.0f;\n        } else {\n            return l.get(size / 2);\n        }\n    }\n    public static void main(String[] args) {\n    assert(median((new ArrayList<Long>(Arrays.asList((long)3l, (long)1l, (long)2l, (long)4l, (long)5l)))) == (float)3l);\n    assert(median((new ArrayList<Long>(Arrays.asList((long)-10l, (long)4l, (long)6l, (long)1000l, (long)10l, (long)20l)))) == (8.0f));\n    assert(median((new ArrayList<Long>(Arrays.asList((long)5l)))) == (float)5l);\n    assert(median((new ArrayList<Long>(Arrays.asList((long)6l, (long)5l)))) == (5.5f));\n    assert(median((new ArrayList<Long>(Arrays.asList((long)8l, (long)1l, (long)3l, (long)9l, (long)9l, (long)2l, (long)7l)))) == (float)7l);\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/44",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    // fib4(0) -> 0\n    // fib4(1) -> 0\n    // fib4(2) -> 2\n    // fib4(3) -> 0\n    // fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).\n    // Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.\n    // >>> fib4((5l))\n    // (4l)\n    // >>> fib4((6l))\n    // (8l)\n    // >>> fib4((7l))\n    // (14l)\n    public static long fib4(long n) {\n    }\n    public static void main(String[] args) {\n    assert(fib4((5l)) == (4l));\n    assert(fib4((8l)) == (28l));\n    assert(fib4((10l)) == (104l));\n    assert(fib4((12l)) == (386l));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(fib4((5l)) == (4l));\n    assert(fib4((8l)) == (28l));\n    assert(fib4((10l)) == (104l));\n    assert(fib4((12l)) == (386l));\n    }\n\n}\n"
+    ],
+    "description": "The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\nfib4(0) -> 0\nfib4(1) -> 0\nfib4(2) -> 2\nfib4(3) -> 0\nfib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).\nPlease write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.\n>>> fib4(5)\n4\n>>> fib4(6)\n8\n>>> fib4(7)\n14",
+    "metadata": {
+      "libs": [],
+      "params": "n: int",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='fib4',\n      args=arguments(\n        args=[\n          arg(\n            arg='n',\n            annotation=Name(id='int', ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='results', ctx=Store())],\n          value=List(\n            elts=[\n              Constant(value=0),\n              Constant(value=0),\n              Constant(value=2),\n              Constant(value=0)],\n            ctx=Load())),\n        If(\n          test=Compare(\n            left=Name(id='n', ctx=Load()),\n            ops=[\n              Lt()],\n            comparators=[\n              Constant(value=4)]),\n          body=[\n            Return(\n              value=Subscript(\n                value=Name(id='results', ctx=Load()),\n                slice=Name(id='n', ctx=Load()),\n                ctx=Load()))]),\n        For(\n          target=Name(id='_', ctx=Store()),\n          iter=Call(\n            func=Name(id='range', ctx=Load()),\n            args=[\n              Constant(value=4),\n              BinOp(\n                left=Name(id='n', ctx=Load()),\n                op=Add(),\n                right=Constant(value=1))]),\n          body=[\n            Expr(\n              value=Call(\n                func=Attribute(\n                  value=Name(id='results', ctx=Load()),\n                  attr='append',\n                  ctx=Load()),\n                args=[\n                  BinOp(\n                    left=BinOp(\n                      left=BinOp(\n                        left=Subscript(\n                          value=Name(id='results', ctx=Load()),\n                          slice=UnaryOp(\n                            op=USub(),\n                            operand=Constant(value=1)),\n                          ctx=Load()),\n                        op=Add(),\n                        right=Subscript(\n                          value=Name(id='results', ctx=Load()),\n                          slice=UnaryOp(\n                            op=USub(),\n                            operand=Constant(value=2)),\n                          ctx=Load())),\n                      op=Add(),\n                      right=Subscript(\n                        value=Name(id='results', ctx=Load()),\n                        slice=UnaryOp(\n                          op=USub(),\n                          operand=Constant(value=3)),\n                        ctx=Load())),\n                    op=Add(),\n                    right=Subscript(\n                      value=Name(id='results', ctx=Load()),\n                      slice=UnaryOp(\n                        op=USub(),\n                        operand=Constant(value=4)),\n                      ctx=Load()))])),\n            Expr(\n              value=Call(\n                func=Attribute(\n                  value=Name(id='results', ctx=Load()),\n                  attr='pop',\n                  ctx=Load()),\n                args=[\n                  Constant(value=0)]))]),\n        Return(\n          value=Subscript(\n            value=Name(id='results', ctx=Load()),\n            slice=UnaryOp(\n              op=USub(),\n              operand=Constant(value=1)),\n            ctx=Load()))])])"
+    },
+    "clones": []
+  },
+  {
+    "id": "HumanEval/4",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // For a given array list of input numbers, calculate Mean Absolute Deviation\n    // around the mean of this dataset.\n    // Mean Absolute Deviation is the average absolute difference between each\n    // element and a centerpoint (mean in this case):\n    // MAD = average | x - x_mean |\n    // >>> meanAbsoluteDeviation((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f))))\n    // (1.0f)\n    public static float meanAbsoluteDeviation(ArrayList<Float> numbers) {\n    }\n    public static void main(String[] args) {\n    assert(meanAbsoluteDeviation((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f)))) == (0.5f));\n    assert(meanAbsoluteDeviation((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f)))) == (1.0f));\n    assert(meanAbsoluteDeviation((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f)))) == (1.2f));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(meanAbsoluteDeviation((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f)))) == (0.5f));\n    assert(meanAbsoluteDeviation((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f)))) == (1.0f));\n    assert(meanAbsoluteDeviation((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f)))) == (1.2f));\n    }\n\n}\n"
+    ],
+    "description": "For a given list of input numbers, calculate Mean Absolute Deviation\naround the mean of this dataset.\nMean Absolute Deviation is the average absolute difference between each\nelement and a centerpoint (mean in this case):\nMAD = average | x - x_mean |\n>>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n1.0",
+    "metadata": {
+      "libs": [],
+      "params": "numbers: List[float]",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List')],\n      level=0),\n    FunctionDef(\n      name='mean_absolute_deviation',\n      args=arguments(\n        args=[\n          arg(\n            arg='numbers',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='float', ctx=Load()),\n              ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='mean', ctx=Store())],\n          value=BinOp(\n            left=Call(\n              func=Name(id='sum', ctx=Load()),\n              args=[\n                Name(id='numbers', ctx=Load())]),\n            op=Div(),\n            right=Call(\n              func=Name(id='len', ctx=Load()),\n              args=[\n                Name(id='numbers', ctx=Load())]))),\n        Return(\n          value=BinOp(\n            left=Call(\n              func=Name(id='sum', ctx=Load()),\n              args=[\n                GeneratorExp(\n                  elt=Call(\n                    func=Name(id='abs', ctx=Load()),\n                    args=[\n                      BinOp(\n                        left=Name(id='x', ctx=Load()),\n                        op=Sub(),\n                        right=Name(id='mean', ctx=Load()))]),\n                  generators=[\n                    comprehension(\n                      target=Name(id='x', ctx=Store()),\n                      iter=Name(id='numbers', ctx=Load()),\n                      is_async=0)])]),\n            op=Div(),\n            right=Call(\n              func=Name(id='len', ctx=Load()),\n              args=[\n                Name(id='numbers', ctx=Load())])))],\n      returns=Name(id='float', ctx=Load()))])"
+    },
+    "clones": []
+  },
+  {
+    "id": "HumanEval/21",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Given array list of numbers (of at least two elements), apply a linear transform to that array list,\n    // such that the smallest number will become 0 and the largest will become 1\n    // >>> rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f))))\n    // (new ArrayList<Float>(Arrays.asList((float)0.0f, (float)0.25f, (float)0.5f, (float)0.75f, (float)1.0f)))\n    public static ArrayList<Float> rescaleToUnit(ArrayList<Float> numbers) {\n    }\n    public static void main(String[] args) {\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)2.0f, (float)49.9f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.0f, (float)1.0f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)100.0f, (float)49.9f)))).equals((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)0.0f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.0f, (float)0.25f, (float)0.5f, (float)0.75f, (float)1.0f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)2.0f, (float)1.0f, (float)5.0f, (float)3.0f, (float)4.0f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.25f, (float)0.0f, (float)1.0f, (float)0.5f, (float)0.75f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)12.0f, (float)11.0f, (float)15.0f, (float)13.0f, (float)14.0f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.25f, (float)0.0f, (float)1.0f, (float)0.5f, (float)0.75f)))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)2.0f, (float)49.9f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.0f, (float)1.0f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)100.0f, (float)49.9f)))).equals((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)0.0f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.0f, (float)0.25f, (float)0.5f, (float)0.75f, (float)1.0f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)2.0f, (float)1.0f, (float)5.0f, (float)3.0f, (float)4.0f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.25f, (float)0.0f, (float)1.0f, (float)0.5f, (float)0.75f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)12.0f, (float)11.0f, (float)15.0f, (float)13.0f, (float)14.0f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.25f, (float)0.0f, (float)1.0f, (float)0.5f, (float)0.75f)))));\n    }\n\n}\n"
+    ],
+    "description": "Given list of numbers (of at least two elements), apply a linear transform to that list,\nsuch that the smallest number will become 0 and the largest will become 1\n>>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])\n[0.0, 0.25, 0.5, 0.75, 1.0]",
+    "metadata": {
+      "libs": [],
+      "params": "numbers: List[float]",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List')],\n      level=0),\n    FunctionDef(\n      name='rescale_to_unit',\n      args=arguments(\n        args=[\n          arg(\n            arg='numbers',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='float', ctx=Load()),\n              ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='min_number', ctx=Store())],\n          value=Call(\n            func=Name(id='min', ctx=Load()),\n            args=[\n              Name(id='numbers', ctx=Load())])),\n        Assign(\n          targets=[\n            Name(id='max_number', ctx=Store())],\n          value=Call(\n            func=Name(id='max', ctx=Load()),\n            args=[\n              Name(id='numbers', ctx=Load())])),\n        Return(\n          value=ListComp(\n            elt=BinOp(\n              left=BinOp(\n                left=Name(id='x', ctx=Load()),\n                op=Sub(),\n                right=Name(id='min_number', ctx=Load())),\n              op=Div(),\n              right=BinOp(\n                left=Name(id='max_number', ctx=Load()),\n                op=Sub(),\n                right=Name(id='min_number', ctx=Load()))),\n            generators=[\n              comprehension(\n                target=Name(id='x', ctx=Store()),\n                iter=Name(id='numbers', ctx=Load()),\n                is_async=0)]))],\n      returns=Subscript(\n        value=Name(id='List', ctx=Load()),\n        slice=Name(id='float', ctx=Load()),\n        ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Given array list of numbers (of at least two elements), apply a linear transform to that array list,\n    // such that the smallest number will become 0 and the largest will become 1\n    // >>> rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f))))\n    // (new ArrayList<Float>(Arrays.asList((float)0.0f, (float)0.25f, (float)0.5f, (float)0.75f, (float)1.0f)))\n    public static ArrayList<Float> rescaleToUnit(ArrayList<Float> numbers) {\nif (numbers == null || numbers.size() < 2) {\n        throw new IllegalArgumentException(\"Array list must contain at least two elements.\");\n    }\n\n    float min = Float.MAX_VALUE;\n    float max = Float.MIN_VALUE;\n\n    for (Float number : numbers) {\n        if (number < min) {\n            min = number;\n        }\n        if (number > max) {\n            max = number;\n        }\n    }\n\n    ArrayList<Float> rescaledNumbers = new ArrayList<>();\n    for (Float number : numbers) {\n        float scaledNumber = ((number - min) / (max - min));\n        rescaledNumbers.add(scaledNumber);\n    }\n\n    return rescaledNumbers;\n    }\n    public static void main(String[] args) {\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)2.0f, (float)49.9f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.0f, (float)1.0f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)100.0f, (float)49.9f)))).equals((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)0.0f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.0f, (float)0.25f, (float)0.5f, (float)0.75f, (float)1.0f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)2.0f, (float)1.0f, (float)5.0f, (float)3.0f, (float)4.0f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.25f, (float)0.0f, (float)1.0f, (float)0.5f, (float)0.75f)))));\n    assert(rescaleToUnit((new ArrayList<Float>(Arrays.asList((float)12.0f, (float)11.0f, (float)15.0f, (float)13.0f, (float)14.0f)))).equals((new ArrayList<Float>(Arrays.asList((float)0.25f, (float)0.0f, (float)1.0f, (float)0.5f, (float)0.75f)))));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/43",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Given length of a side and high return area for a triangle.\n    // >>> triangleArea((5l), (3l))\n    // (7.5f)\n    public static float triangleArea(long a, long h) {\n    }\n    public static void main(String[] args) {\n    assert(triangleArea((5l), (3l)) == (7.5f));\n    assert(triangleArea((2l), (2l)) == (2.0f));\n    assert(triangleArea((10l), (8l)) == (40.0f));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(triangleArea((5l), (3l)) == (7.5f));\n    assert(triangleArea((2l), (2l)) == (2.0f));\n    assert(triangleArea((10l), (8l)) == (40.0f));\n    }\n\n}\n"
+    ],
+    "description": "Given length of a side and high return area for a triangle.\n>>> triangle_area(5, 3)\n7.5",
+    "metadata": {
+      "libs": [],
+      "params": "a, h",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='triangle_area',\n      args=arguments(\n        args=[\n          arg(arg='a'),\n          arg(arg='h')]),\n      body=[\n        Return(\n          value=BinOp(\n            left=BinOp(\n              left=Name(id='a', ctx=Load()),\n              op=Mult(),\n              right=Name(id='h', ctx=Load())),\n            op=Div(),\n            right=Constant(value=2.0)))])])"
+    },
+    "clones": []
+  },
+  {
+    "id": "HumanEval/18",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Find how many times a given substring can be found in the original string. Count overlaping cases.\n    // >>> howManyTimes((\"\"), (\"a\"))\n    // (0l)\n    // >>> howManyTimes((\"aaa\"), (\"a\"))\n    // (3l)\n    // >>> howManyTimes((\"aaaa\"), (\"aa\"))\n    // (3l)\n    public static long howManyTimes(String string, String substring) {\n    }\n    public static void main(String[] args) {\n    assert(howManyTimes((\"\"), (\"x\")) == (0l));\n    assert(howManyTimes((\"xyxyxyx\"), (\"x\")) == (4l));\n    assert(howManyTimes((\"cacacacac\"), (\"cac\")) == (4l));\n    assert(howManyTimes((\"john doe\"), (\"john\")) == (1l));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(howManyTimes((\"\"), (\"x\")) == (0l));\n    assert(howManyTimes((\"xyxyxyx\"), (\"x\")) == (4l));\n    assert(howManyTimes((\"cacacacac\"), (\"cac\")) == (4l));\n    assert(howManyTimes((\"john doe\"), (\"john\")) == (1l));\n    }\n\n}\n"
+    ],
+    "description": "Find how many times a given substring can be found in the original string. Count overlaping cases.\n>>> how_many_times('', 'a')\n0\n>>> how_many_times('aaa', 'a')\n3\n>>> how_many_times('aaaa', 'aa')\n3",
+    "metadata": {
+      "libs": [],
+      "params": "string: str, substring: str",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    FunctionDef(\n      name='how_many_times',\n      args=arguments(\n        args=[\n          arg(\n            arg='string',\n            annotation=Name(id='str', ctx=Load())),\n          arg(\n            arg='substring',\n            annotation=Name(id='str', ctx=Load()))]),\n      body=[\n        Assign(\n          targets=[\n            Name(id='times', ctx=Store())],\n          value=Constant(value=0)),\n        For(\n          target=Name(id='i', ctx=Store()),\n          iter=Call(\n            func=Name(id='range', ctx=Load()),\n            args=[\n              BinOp(\n                left=BinOp(\n                  left=Call(\n                    func=Name(id='len', ctx=Load()),\n                    args=[\n                      Name(id='string', ctx=Load())]),\n                  op=Sub(),\n                  right=Call(\n                    func=Name(id='len', ctx=Load()),\n                    args=[\n                      Name(id='substring', ctx=Load())])),\n                op=Add(),\n                right=Constant(value=1))]),\n          body=[\n            If(\n              test=Compare(\n                left=Subscript(\n                  value=Name(id='string', ctx=Load()),\n                  slice=Slice(\n                    lower=Name(id='i', ctx=Load()),\n                    upper=BinOp(\n                      left=Name(id='i', ctx=Load()),\n                      op=Add(),\n                      right=Call(\n                        func=Name(id='len', ctx=Load()),\n                        args=[\n                          Name(id='substring', ctx=Load())]))),\n                  ctx=Load()),\n                ops=[\n                  Eq()],\n                comparators=[\n                  Name(id='substring', ctx=Load())]),\n              body=[\n                AugAssign(\n                  target=Name(id='times', ctx=Store()),\n                  op=Add(),\n                  value=Constant(value=1))])]),\n        Return(\n          value=Name(id='times', ctx=Load()))],\n      returns=Name(id='int', ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "gemma3:latest",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot gemma3:latest-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Find how many times a given substring can be found in the original string. Count overlaping cases.\n    // >>> howManyTimes((\"\"), (\"a\"))\n    // (0l)\n    // >>> howManyTimes((\"aaa\"), (\"a\"))\n    // (3l)\n    // >>> howManyTimes((\"aaaa\"), (\"aa\"))\n    // (3l)\n    public static long howManyTimes(String string, String substring) {\nlong count = 0;\nint index = 0;\nwhile ((index = string.indexOf(substring, index)) != -1) {\n    count++;\n    index += 1;\n}\nreturn count;\n    }\n    public static void main(String[] args) {\n    assert(howManyTimes((\"\"), (\"x\")) == (0l));\n    assert(howManyTimes((\"xyxyxyx\"), (\"x\")) == (4l));\n    assert(howManyTimes((\"cacacacac\"), (\"cac\")) == (4l));\n    assert(howManyTimes((\"john doe\"), (\"john\")) == (1l));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/5",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Insert a number 'delimeter' between every two consecutive elements of input array list `numbers'\n    // >>> intersperse((new ArrayList<Long>(Arrays.asList())), (4l))\n    // (new ArrayList<Long>(Arrays.asList()))\n    // >>> intersperse((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l))), (4l))\n    // (new ArrayList<Long>(Arrays.asList((long)1l, (long)4l, (long)2l, (long)4l, (long)3l)))\n    public static ArrayList<Long> intersperse(ArrayList<Long> numbers, long delimeter) {\n    }\n    public static void main(String[] args) {\n    assert(intersperse((new ArrayList<Long>(Arrays.asList())), (7l)).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(intersperse((new ArrayList<Long>(Arrays.asList((long)5l, (long)6l, (long)3l, (long)2l))), (8l)).equals((new ArrayList<Long>(Arrays.asList((long)5l, (long)8l, (long)6l, (long)8l, (long)3l, (long)8l, (long)2l)))));\n    assert(intersperse((new ArrayList<Long>(Arrays.asList((long)2l, (long)2l, (long)2l))), (2l)).equals((new ArrayList<Long>(Arrays.asList((long)2l, (long)2l, (long)2l, (long)2l, (long)2l)))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(intersperse((new ArrayList<Long>(Arrays.asList())), (7l)).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(intersperse((new ArrayList<Long>(Arrays.asList((long)5l, (long)6l, (long)3l, (long)2l))), (8l)).equals((new ArrayList<Long>(Arrays.asList((long)5l, (long)8l, (long)6l, (long)8l, (long)3l, (long)8l, (long)2l)))));\n    assert(intersperse((new ArrayList<Long>(Arrays.asList((long)2l, (long)2l, (long)2l))), (2l)).equals((new ArrayList<Long>(Arrays.asList((long)2l, (long)2l, (long)2l, (long)2l, (long)2l)))));\n    }\n\n}\n"
+    ],
+    "description": "Insert a number 'delimeter' between every two consecutive elements of input list `numbers'\n>>> intersperse([], 4)\n[]\n>>> intersperse([1, 2, 3], 4)\n[1, 4, 2, 4, 3]",
+    "metadata": {
+      "libs": [],
+      "params": "numbers: List[int], delimeter: int",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List')],\n      level=0),\n    FunctionDef(\n      name='intersperse',\n      args=arguments(\n        args=[\n          arg(\n            arg='numbers',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='int', ctx=Load()),\n              ctx=Load())),\n          arg(\n            arg='delimeter',\n            annotation=Name(id='int', ctx=Load()))]),\n      body=[\n        If(\n          test=UnaryOp(\n            op=Not(),\n            operand=Name(id='numbers', ctx=Load())),\n          body=[\n            Return(\n              value=List(ctx=Load()))]),\n        Assign(\n          targets=[\n            Name(id='result', ctx=Store())],\n          value=List(ctx=Load())),\n        For(\n          target=Name(id='n', ctx=Store()),\n          iter=Subscript(\n            value=Name(id='numbers', ctx=Load()),\n            slice=Slice(\n              upper=UnaryOp(\n                op=USub(),\n                operand=Constant(value=1))),\n            ctx=Load()),\n          body=[\n            Expr(\n              value=Call(\n                func=Attribute(\n                  value=Name(id='result', ctx=Load()),\n                  attr='append',\n                  ctx=Load()),\n                args=[\n                  Name(id='n', ctx=Load())])),\n            Expr(\n              value=Call(\n                func=Attribute(\n                  value=Name(id='result', ctx=Load()),\n                  attr='append',\n                  ctx=Load()),\n                args=[\n                  Name(id='delimeter', ctx=Load())]))]),\n        Expr(\n          value=Call(\n            func=Attribute(\n              value=Name(id='result', ctx=Load()),\n              attr='append',\n              ctx=Load()),\n            args=[\n              Subscript(\n                value=Name(id='numbers', ctx=Load()),\n                slice=UnaryOp(\n                  op=USub(),\n                  operand=Constant(value=1)),\n                ctx=Load())])),\n        Return(\n          value=Name(id='result', ctx=Load()))],\n      returns=Subscript(\n        value=Name(id='List', ctx=Load()),\n        slice=Name(id='int', ctx=Load()),\n        ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "gemma3:latest",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot gemma3:latest-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Insert a number 'delimeter' between every two consecutive elements of input array list `numbers'\n    // >>> intersperse((new ArrayList<Long>(Arrays.asList())), (4l))\n    // (new ArrayList<Long>(Arrays.asList()))\n    // >>> intersperse((new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l))), (4l))\n    // (new ArrayList<Long>(Arrays.asList((long)1l, (long)4l, (long)2l, (long)4l, (long)3l)))\n    public static ArrayList<Long> intersperse(ArrayList<Long> numbers, long delimeter) {\nArrayList<Long> result = new ArrayList<>();\n        if (numbers == null || numbers.isEmpty()) {\n            return result;\n        }\n\n        result.add(numbers.get(0));\n        for (int i = 1; i < numbers.size(); i++) {\n            result.add(delimeter);\n            result.add(numbers.get(i));\n        }\n\n        return result;\n    }\n    public static void main(String[] args) {\n    assert(intersperse((new ArrayList<Long>(Arrays.asList())), (7l)).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(intersperse((new ArrayList<Long>(Arrays.asList((long)5l, (long)6l, (long)3l, (long)2l))), (8l)).equals((new ArrayList<Long>(Arrays.asList((long)5l, (long)8l, (long)6l, (long)8l, (long)3l, (long)8l, (long)2l)))));\n    assert(intersperse((new ArrayList<Long>(Arrays.asList((long)2l, (long)2l, (long)2l))), (2l)).equals((new ArrayList<Long>(Arrays.asList((long)2l, (long)2l, (long)2l, (long)2l, (long)2l)))));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/22",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Filter given array list of any javathon values only for integers\n    // >>> filterIntegers((new ArrayList<Object>(Arrays.asList((String)\"a\", (String)3.14f, (String)5l))))\n    // (new ArrayList<Long>(Arrays.asList((long)5l)))\n    // >>> filterIntegers((new ArrayList<Object>(Arrays.asList(1l, 2l, 3l, \"abc\", new HashMap<Long,Long>(Map.of()), new ArrayList<Long>(Arrays.asList())))))\n    // (new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l)))\n    public static ArrayList<Long> filterIntegers(ArrayList<Object> values) {\n    }\n    public static void main(String[] args) {\n    assert(filterIntegers((new ArrayList<Object>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(filterIntegers((new ArrayList<Object>(Arrays.asList(4l, new HashMap<Long,Long>(Map.of()), new ArrayList<Long>(Arrays.asList()), 23.2f, 9l, \"adasd\")))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)9l)))));\n    assert(filterIntegers((new ArrayList<Object>(Arrays.asList(3l, \"c\", 3l, 3l, \"a\", \"b\")))).equals((new ArrayList<Long>(Arrays.asList((long)3l, (long)3l, (long)3l)))));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(filterIntegers((new ArrayList<Object>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(filterIntegers((new ArrayList<Object>(Arrays.asList(4l, new HashMap<Long,Long>(Map.of()), new ArrayList<Long>(Arrays.asList()), 23.2f, 9l, \"adasd\")))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)9l)))));\n    assert(filterIntegers((new ArrayList<Object>(Arrays.asList(3l, \"c\", 3l, 3l, \"a\", \"b\")))).equals((new ArrayList<Long>(Arrays.asList((long)3l, (long)3l, (long)3l)))));\n    }\n\n}\n"
+    ],
+    "description": "Filter given list of any python values only for integers\n>>> filter_integers(['a', 3.14, 5])\n[5]\n>>> filter_integers([1, 2, 3, 'abc', {}, []])\n[1, 2, 3]",
+    "metadata": {
+      "libs": [],
+      "params": "values: List[Any]",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List'),\n        alias(name='Any')],\n      level=0),\n    FunctionDef(\n      name='filter_integers',\n      args=arguments(\n        args=[\n          arg(\n            arg='values',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='Any', ctx=Load()),\n              ctx=Load()))]),\n      body=[\n        Return(\n          value=ListComp(\n            elt=Name(id='x', ctx=Load()),\n            generators=[\n              comprehension(\n                target=Name(id='x', ctx=Store()),\n                iter=Name(id='values', ctx=Load()),\n                ifs=[\n                  Call(\n                    func=Name(id='isinstance', ctx=Load()),\n                    args=[\n                      Name(id='x', ctx=Load()),\n                      Name(id='int', ctx=Load())])],\n                is_async=0)]))],\n      returns=Subscript(\n        value=Name(id='List', ctx=Load()),\n        slice=Name(id='int', ctx=Load()),\n        ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Filter given array list of any javathon values only for integers\n    // >>> filterIntegers((new ArrayList<Object>(Arrays.asList((String)\"a\", (String)3.14f, (String)5l))))\n    // (new ArrayList<Long>(Arrays.asList((long)5l)))\n    // >>> filterIntegers((new ArrayList<Object>(Arrays.asList(1l, 2l, 3l, \"abc\", new HashMap<Long,Long>(Map.of()), new ArrayList<Long>(Arrays.asList())))))\n    // (new ArrayList<Long>(Arrays.asList((long)1l, (long)2l, (long)3l)))\n    public static ArrayList<Long> filterIntegers(ArrayList<Object> values) {\nArrayList<Long> filteredList = new ArrayList<>();\n    for (Object value : values) {\n        if (value instanceof Long) {\n            filteredList.add((Long)value);\n        }\n    }\n    return filteredList;\n    }\n    public static void main(String[] args) {\n    assert(filterIntegers((new ArrayList<Object>(Arrays.asList()))).equals((new ArrayList<Long>(Arrays.asList()))));\n    assert(filterIntegers((new ArrayList<Object>(Arrays.asList(4l, new HashMap<Long,Long>(Map.of()), new ArrayList<Long>(Arrays.asList()), 23.2f, 9l, \"adasd\")))).equals((new ArrayList<Long>(Arrays.asList((long)4l, (long)9l)))));\n    assert(filterIntegers((new ArrayList<Object>(Arrays.asList(3l, \"c\", 3l, 3l, \"a\", \"b\")))).equals((new ArrayList<Long>(Arrays.asList((long)3l, (long)3l, (long)3l)))));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  },
+  {
+    "id": "HumanEval/0",
+    "language": "java",
+    "original_code": "import java.util.*;\nimport java.lang.reflect.*;\nimport org.javatuples.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Check if in given array list of numbers, are any two numbers closer to each other than\n    // given threshold.\n    // >>> hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f))), (0.5f))\n    // (false)\n    // >>> hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.8f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.0f))), (0.3f))\n    // (true)\n    public static boolean hasCloseElements(ArrayList<Float> numbers, float threshold) {\n    }\n    public static void main(String[] args) {\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.9f, (float)4.0f, (float)5.0f, (float)2.2f))), (0.3f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.9f, (float)4.0f, (float)5.0f, (float)2.2f))), (0.05f)) == (false));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)5.9f, (float)4.0f, (float)5.0f))), (0.95f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)5.9f, (float)4.0f, (float)5.0f))), (0.8f)) == (false));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.0f))), (0.1f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.1f, (float)2.2f, (float)3.1f, (float)4.1f, (float)5.1f))), (1.0f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.1f, (float)2.2f, (float)3.1f, (float)4.1f, (float)5.1f))), (0.5f)) == (false));\n    }\n\n}\n",
+    "test": [
+      "    }\n    public static void main(String[] args) {\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.9f, (float)4.0f, (float)5.0f, (float)2.2f))), (0.3f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.9f, (float)4.0f, (float)5.0f, (float)2.2f))), (0.05f)) == (false));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)5.9f, (float)4.0f, (float)5.0f))), (0.95f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)5.9f, (float)4.0f, (float)5.0f))), (0.8f)) == (false));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.0f))), (0.1f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.1f, (float)2.2f, (float)3.1f, (float)4.1f, (float)5.1f))), (1.0f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.1f, (float)2.2f, (float)3.1f, (float)4.1f, (float)5.1f))), (0.5f)) == (false));\n    }\n\n}\n"
+    ],
+    "description": "Check if in given list of numbers, are any two numbers closer to each other than\ngiven threshold.\n>>> has_close_elements([1.0, 2.0, 3.0], 0.5)\nFalse\n>>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\nTrue",
+    "metadata": {
+      "libs": [],
+      "params": "numbers: List[float], threshold: float",
+      "return_text": "",
+      "split": "easy",
+      "ast": "Module(\n  body=[\n    ImportFrom(\n      module='typing',\n      names=[\n        alias(name='List')],\n      level=0),\n    FunctionDef(\n      name='has_close_elements',\n      args=arguments(\n        args=[\n          arg(\n            arg='numbers',\n            annotation=Subscript(\n              value=Name(id='List', ctx=Load()),\n              slice=Name(id='float', ctx=Load()),\n              ctx=Load())),\n          arg(\n            arg='threshold',\n            annotation=Name(id='float', ctx=Load()))]),\n      body=[\n        For(\n          target=Tuple(\n            elts=[\n              Name(id='idx', ctx=Store()),\n              Name(id='elem', ctx=Store())],\n            ctx=Store()),\n          iter=Call(\n            func=Name(id='enumerate', ctx=Load()),\n            args=[\n              Name(id='numbers', ctx=Load())]),\n          body=[\n            For(\n              target=Tuple(\n                elts=[\n                  Name(id='idx2', ctx=Store()),\n                  Name(id='elem2', ctx=Store())],\n                ctx=Store()),\n              iter=Call(\n                func=Name(id='enumerate', ctx=Load()),\n                args=[\n                  Name(id='numbers', ctx=Load())]),\n              body=[\n                If(\n                  test=Compare(\n                    left=Name(id='idx', ctx=Load()),\n                    ops=[\n                      NotEq()],\n                    comparators=[\n                      Name(id='idx2', ctx=Load())]),\n                  body=[\n                    Assign(\n                      targets=[\n                        Name(id='distance', ctx=Store())],\n                      value=Call(\n                        func=Name(id='abs', ctx=Load()),\n                        args=[\n                          BinOp(\n                            left=Name(id='elem', ctx=Load()),\n                            op=Sub(),\n                            right=Name(id='elem2', ctx=Load()))])),\n                    If(\n                      test=Compare(\n                        left=Name(id='distance', ctx=Load()),\n                        ops=[\n                          Lt()],\n                        comparators=[\n                          Name(id='threshold', ctx=Load())]),\n                      body=[\n                        Return(\n                          value=Constant(value=True))])])])]),\n        Return(\n          value=Constant(value=False))],\n      returns=Name(id='bool', ctx=Load()))])"
+    },
+    "clones": [
+      {
+        "model": "qwen2.5:3b",
+        "context": "java_prompt",
+        "strategy": "zero-shot",
+        "clone_id": "zero-shot qwen2.5:3b-java 1",
+        "code": "import java.util.*;\nimport java.lang.reflect.*;\nimport java.security.*;\nimport java.math.*;\nimport java.io.*;\nimport java.util.stream.*;\nclass Problem {\n    // Check if in given array list of numbers, are any two numbers closer to each other than\n    // given threshold.\n    // >>> hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f))), (0.5f))\n    // (false)\n    // >>> hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.8f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.0f))), (0.3f))\n    // (true)\n    public static boolean hasCloseElements(ArrayList<Float> numbers, float threshold) {\nCollections.sort(numbers); // Sort the list to make it easier to find close elements\n\n    for (int i = 0; i < numbers.size() - 1; i++) {\n        if ((numbers.get(i + 1) - numbers.get(i)) < threshold) {\n            return true;\n        }\n    }\n\n    return false;\n    }\n    public static void main(String[] args) {\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.9f, (float)4.0f, (float)5.0f, (float)2.2f))), (0.3f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.9f, (float)4.0f, (float)5.0f, (float)2.2f))), (0.05f)) == (false));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)5.9f, (float)4.0f, (float)5.0f))), (0.95f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)5.9f, (float)4.0f, (float)5.0f))), (0.8f)) == (false));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.0f, (float)2.0f, (float)3.0f, (float)4.0f, (float)5.0f, (float)2.0f))), (0.1f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.1f, (float)2.2f, (float)3.1f, (float)4.1f, (float)5.1f))), (1.0f)) == (true));\n    assert(hasCloseElements((new ArrayList<Float>(Arrays.asList((float)1.1f, (float)2.2f, (float)3.1f, (float)4.1f, (float)5.1f))), (0.5f)) == (false));\n    }\n\n}\n",
+        "test_results": {
+          "main": "PASS"
+        },
+        "metrics": {
+          "codebleu": {}
+        },
+        "cluster": 0
+      }
+    ]
+  }
+]
