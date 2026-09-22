@@ -60,15 +60,14 @@ LLM_OPTS = {
     "num_predict": 1500,       # max output tokens
 }
 REMOTE_OLLAMA = False # change to False to use local ollama server
-N_ENTRIES = 50 # number of dataset entries to use as inputs for generation
-CLONES_PER_ENTRY = 1 # number of clones to generate per dataset entry per prompt configuration
+N_ENTRIES = 100 # number of dataset entries to use as inputs for generation
+CLONES_PER_ENTRY = 20 # number of clones to generate per dataset entry per prompt configuration
 OLLAMA_CONFIG_FILE_REMOTE = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")), "resources", "ollama_config_remote.json")
 OLLAMA_CONFIG_FILE_LOCAL = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")), "resources", "ollama_config_local.json")
 
 # Prompt configuration settings
-CONTEXTS = ["code"]
-# REFACS = [f"refac_{i}" for i in range(1, 8)]  # refac_1..refac_7
-REFACS = []
+CONTEXTS = ["code", "tests"]
+REFACS = [f"refac_{i}" for i in range(1, 8)]  # refac_1..refac_7
 STRATEGIES = ["zero-shot"]  
 COMBINATIONS_PER_SET = 1 # size of the refactoring combinations to use
 NUM_COMBINATIONS_TOUSE = 1 # number of refactoring combinations to use per entry
