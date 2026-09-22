@@ -69,8 +69,8 @@ OLLAMA_CONFIG_FILE_LOCAL = os.path.join(os.path.abspath(os.path.join(os.path.dir
 CONTEXTS = ["code", "tests"]
 REFACS = [f"refac_{i}" for i in range(1, 8)]  # refac_1..refac_7
 STRATEGIES = ["zero-shot"]  
-COMBINATIONS_PER_SET = 1 # size of the refactoring combinations to use
-NUM_COMBINATIONS_TOUSE = 1 # number of refactoring combinations to use per entry
+COMBINATIONS_PER_SET = 3 # size of the refactoring combinations to use
+NUM_COMBINATIONS_TOUSE = 2 # number of refactoring combinations to use per entry
 RANDOM_SEED = 42 # seed for random selection of refactoring combinations
 FUNCTION_NAME = "task_func"  
 
