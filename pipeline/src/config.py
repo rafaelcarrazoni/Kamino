@@ -50,7 +50,7 @@ Gemma3   = "gemma3:latest"
 Gpt20b   = "gpt-oss:20b"
 LLama3   = "llama3.1:latest"
 Qwen3b   = "qwen2.5:3b"
-ALL_MODELS = [Gemma3, Qwen3b]
+ALL_MODELS = [DeepSeek, Gpt20b,Qwen3b]
 
 #  Generation settings 
 LLM_OPTS = {
@@ -66,7 +66,7 @@ OLLAMA_CONFIG_FILE_REMOTE = os.path.join(os.path.abspath(os.path.join(os.path.di
 OLLAMA_CONFIG_FILE_LOCAL = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")), "resources", "ollama_config_local.json")
 
 # Prompt configuration settings
-CONTEXTS = ["code", "tests"]
+CONTEXTS = ["test"]
 REFACS = [f"refac_{i}" for i in range(1, 8)]  # refac_1..refac_7
 STRATEGIES = ["zero-shot"]  
 COMBINATIONS_PER_SET = 3 # size of the refactoring combinations to use
