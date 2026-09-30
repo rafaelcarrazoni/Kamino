@@ -50,7 +50,7 @@ Gemma3   = "gemma3:latest"
 Gpt20b   = "gpt-oss:20b"
 LLama3   = "llama3.1:latest"
 Qwen3b   = "qwen2.5:3b"
-ALL_MODELS = [DeepSeek, Gpt20b,Qwen3b]
+ALL_MODELS = [DeepSeek,Gpt20b,Qwen3b]
 
 #  Generation settings 
 LLM_OPTS = {
