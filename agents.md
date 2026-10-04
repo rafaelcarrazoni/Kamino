@@ -518,6 +518,112 @@ PY
 
 Read 
 
+## Resumo contextual da conversa atual
+
+### 1) `SAMPLE_SIZE` e `SAMPLE_SEED`
+Em `config.py`, essas variáveis controlam a amostragem experimental do dataset:
+
+```python
+# Normalization settings
+SAMPLE_SIZE = 50
+SAMPLE_SEED = 0
+```
+
+- `SAMPLE_SIZE` define quantas entradas serão sorteadas para a amostra.
+- `SAMPLE_SEED` garante que a amostra seja determinística e reproduzível.
+
+No código, a chamada de amostragem fica comentada em `normalization.py`, então o projeto está pronto para a funcionalidade, mas não a usa ativamente no fluxo atual.
+
+### 2) O que significa "Skipping ... (already used)"
+A mensagem:
+
+```text
+Skipping deepseek-r1:14b, zero-shot, test, ['refac_1', 'refac_4', 'refac_5'] (already used)
+```
+
+significa que a pipeline já executou aquela combinação de:
+- modelo
+- estratégia
+- contexto
+- conjunto de refatorações
+
+e por isso ela foi pulada para evitar duplicação.
+
+A lógica está em `clone_gen.py`: a chave da combinação é montada como:
+
+```python
+combo_key = (model, strategy, context, tuple(sorted(selected_refacs)))
+```
+
+Se essa chave já estiver no arquivo de saída, o código imprime `Skipping ... (already used)`.
+
+### 3) `COMBINATIONS_PER_SET` e `NUM_COMBINATIONS_TOUSE`
+Essas duas variáveis governam a seleção dos conjuntos de refatorações antes da geração:
+
+- `COMBINATIONS_PER_SET`: tamanho de cada conjunto de refatorações.
+- `NUM_COMBINATIONS_TOUSE`: quantos desses conjuntos vão entrar no experimento.
+
+Exemplo:
+
+```python
+REFACS = ["refac_1", ..., "refac_7"]
+COMBINATIONS_PER_SET = 3
+NUM_COMBINATIONS_TOUSE = 7
+```
+
+Isso significa que a pipeline gera combinações como `('refac_1','refac_2','refac_3')`, e depois seleciona apenas um subconjunto delas para rodar.
+
+### 4) A geração não sorteia uma combinação nova para cada clone
+A resposta correta é:
+
+- não é “uma combinação aleatória por clone”;
+- a seleção da combinação acontece antes do laço principal de geração;
+- depois disso, para cada configuração escolhida, a pipeline gera vários clones usando a mesma combinação.
+
+O fluxo real é:
+
+```python
+for model in ALL_MODELS:
+    for strategy in STRATEGIES:
+        for context in CONTEXTS:
+            for refac_tuple in subset_combinations:
+                _run_clone_generation(...)
+```
+
+E dentro de `_run_clone_generation()` há um laço que gera vários clones por entrada:
+
+```python
+for k in range(clones_per_entry):
+    ...
+```
+
+Assim, `CLONES_PER_ENTRY` determina quantos clones são gerados para cada entrada, enquanto `COMBINATIONS_PER_SET` e `NUM_COMBINATIONS_TOUSE` determinam quais combinações de refatoração serão testadas.
+
+### 5) Contextos, estratégias e refatorações suportadas
+Os valores possíveis no projeto são:
+
+- contextos: `code`, `test`/`tests`, `complete`, `AST`
+- estratégias: `zero-shot`, `cot`
+- refatorações: `refac_1` a `refac_7`
+
+No arquivo atual de configuração, a execução está mais enxuta:
+
+```python
+CONTEXTS = ["test", "code"]
+STRATEGIES = ["zero-shot"]
+REFACS = [f"refac_{i}" for i in range(1, 8)]
+```
+
+ou seja, o projeto está usando um subconjunto menor do espaço total possível de combinações.
+
+### 6) Sobre a métrica de CodeBLEU
+A métrica de CodeBLEU está integrada ao fluxo, mas o ambiente ainda depende de bibliotecas como `parso` e `codebleu`; sem elas, a execução falha antes do cálculo. O código da métrica existe e é chamado em `filtering.py`/`clustering.py`, mas o ambiente precisa estar corretamente configurado para que ela funcione de fato.
+
+### 7) Conclusão prática
+A mensagem `Skipping ... (already used)` não é erro; ela é um sinal de deduplicação do pipeline para evitar reprocessar combinações que já foram geradas anteriormente. Isso é uma parte intencional da orquestração do projeto e ajuda a controlar custo e repetição de experimentos.
+
+
+
 ## Status da métrica
 
 Não, no ambiente atual o cálculo de métricas não está funcionando.
