@@ -22,15 +22,12 @@ def _calc_efficient_prompts(top_n=TOP_N):
     df0 = _load_clones(CLEANED_PATH)
     df1 = _load_clones(FILTERED_PATH_CODEBLEU)
     df2 = _load_clones(FILTERED_PATH_TESTS)
-    # df3 = _load_clones(REPROMPT_PATH_CLEANED)
     df5 = _load_clones(FINAL_DATASET) 
-    # Note: df4 (clones that pass all tests) is implicitly represented inside df2 and df3
 
     counts = [
         _count_stage(df0, "0"),
         _count_stage(df1, "1"),
         _count_stage(df2, "2"),
-        # _count_stage(df3, "3"),
         _count_stage(df5, "5"),
     ]
 
@@ -46,10 +43,15 @@ def _calc_efficient_prompts(top_n=TOP_N):
     )
 
     # Survival at each stage
-    eff_df["S_codebleu"] = eff_df["N_1"] / eff_df["N_0"]
-    eff_df["S_tests"] = eff_df["N_2"] / eff_df["N_1"]
-    eff_df["S_reprompt"] = eff_df["N_3"] / eff_df["N_2"]
-    eff_df["S_final"] = eff_df["N_5"] / (eff_df["N_3"] + eff_df["N_2"])
+    eff_df["S_codebleu"] = (
+        eff_df["N_1"] / eff_df["N_0"].replace(0, float("nan"))
+    ).fillna(0)
+    eff_df["S_tests"] = (
+        eff_df["N_2"] / eff_df["N_1"].replace(0, float("nan"))
+    ).fillna(0)
+    eff_df["S_final"] = (
+        eff_df["N_5"] / eff_df["N_2"].replace(0, float("nan"))
+    ).fillna(0)
 
     eff_df = eff_df.round(4)
     eff_df = eff_df.sort_values(by="efficiency", ascending=False)
@@ -85,4 +87,3 @@ def _count_stage(df, label):
         .size()
         .reset_index(name=f"N_{label}")
     )
-
