@@ -1,5 +1,5 @@
 import re, textwrap, requests, ast, astor, re, os, json, sys, random
-from ..utils.prompts import context_builders
+from ..utils.prompts import context_builders, normalize_test_snippets
 from itertools import combinations
 from collections import Counter
 from src.config import *
@@ -267,10 +267,10 @@ def _run_clone_generation(dataset_path, out_path, n_entries, clones_per_entry, o
 
         # Extract fields from entry 
         original_body   = entry["original_code"]
-        tests_list      = entry["test"]
+        tests_list      = normalize_test_snippets(entry.get("test", ""))
         description     = entry.get("description", "") 
 
-        tests_snippet   = tests_list[0] if tests_list else ""
+        tests_snippet   = "\n\n".join(tests_list)
         params          = entry.get("metadata", {}).get("params", [])
         return_text     = entry.get("metadata", {}).get("return_text", [])  
         gen_ast         = entry.get("metadata", {}).get("ast", "")

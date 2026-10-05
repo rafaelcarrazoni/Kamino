@@ -26,6 +26,19 @@ MANDATORY_HINTS = """
 - If you cannot generate code, output an empty function stub instead.
 """
 
+def normalize_test_snippets(test_data):
+    if isinstance(test_data, str):
+        return [test_data] if test_data else []
+    if isinstance(test_data, list):
+        return [
+            snippet
+            for item in test_data
+            for snippet in normalize_test_snippets(item)
+        ]
+    raise TypeError(
+        f"Test data must be a string or a list of strings, got {type(test_data).__name__}"
+    )
+
 REFACTORING = {
   "refac_1": ( # Algorithmic reimplementation
     "Generate an alternative solution using a different algorithmic strategy. You may use built-in functions, comprehensions, or alternative logic constructs."

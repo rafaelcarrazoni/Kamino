@@ -1,6 +1,11 @@
 import json, os, re, random, ast
 from typing import Union
-from ..utils.helper_functions import (validate_with_unittest, install_package, hf_login)
+from ..utils.helper_functions import (
+    validate_with_unittest,
+    install_package,
+    hf_login,
+)
+from ..utils.prompts import normalize_test_snippets
 from src.config import *
 
 def pre_process_data():
@@ -33,11 +38,15 @@ def _normalize(dataset_split):
 
         returns_list = doc_struct.get("returns", [])
         return_text = " ".join(returns_list)
- 
+
         params_list = doc_struct.get("params", [])
         params = " ".join(params_list)
- 
-        original_code = entry.get("canonical_solution", "")
+
+        metadata = entry.get("metadata", {})
+        original_code = entry.get("canonical_solution") or entry.get("original_code", "")
+        description_text = description_text or entry.get("description", "")
+        return_text = return_text or metadata.get("return_text", "")
+        params = params or metadata.get("params", "")
 
         # Append part of complete_prompt until """ or '''
         complete_prompt = entry.get("complete_prompt", entry.get("prompt", ""))
@@ -60,16 +69,16 @@ def _normalize(dataset_split):
                 break
          
         normalized.append({
-            "id": entry.get("task_id", f"HumanEval/{index}"),
+            "id": entry.get("task_id", entry.get("id", f"HumanEval/{index}")),
             "language": entry.get("language", "python"),
             "original_code": original_code,
-            "test": [entry.get("test", "")],
+            "test": normalize_test_snippets(entry.get("test", "")),
             "description": description_text,
             "metadata": {
-                "libs": entry.get("libs", []),
+                "libs": entry.get("libs", metadata.get("libs", [])),
                 "params": params,
                 "return_text": return_text, 
-                "split": "easy",
+                "split": metadata.get("split", "easy"),
             }
         })
     return normalized
@@ -326,4 +335,3 @@ def _id_numeric_key(id_str: str):
         return (prefix, int(m.group(1)))
     # no trailing digits -> put after numeric ids, sorted by full string
     return (id_str, float("inf"))
-
