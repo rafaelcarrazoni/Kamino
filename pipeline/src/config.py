@@ -50,7 +50,7 @@ Gemma3   = "gemma3:latest"
 Gpt20b   = "gpt-oss:20b"
 LLama3   = "llama3.1:latest"
 Qwen3b   = "qwen2.5:3b"
-ALL_MODELS = [DeepSeek,Gpt20b,Gemma3]
+ALL_MODELS = [DeepSeek,LLama3]
 
 #  Generation settings 
 LLM_OPTS = {
@@ -60,7 +60,7 @@ LLM_OPTS = {
     "num_predict": 1500,       # max output tokens
 }
 REMOTE_OLLAMA = False # change to False to use local ollama server
-N_ENTRIES = 100 # number of dataset entries to use as inputs for generation
+N_ENTRIES = 30 # number of dataset entries to use as inputs for generation
 CLONES_PER_ENTRY = 1 # number of clones to generate per dataset entry per prompt configuration
 OLLAMA_CONFIG_FILE_REMOTE = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")), "resources", "ollama_config_remote.json")
 OLLAMA_CONFIG_FILE_LOCAL = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")), "resources", "ollama_config_local.json")
@@ -70,7 +70,7 @@ CONTEXTS = ["test", "code"]
 REFACS = [f"refac_{i}" for i in range(1, 8)]  # refac_1..refac_7
 STRATEGIES = ["zero-shot"]  
 COMBINATIONS_PER_SET = 3 # size of the refactoring combinations to use
-NUM_COMBINATIONS_TOUSE = 7 # number of refactoring combinations to use per entry
+NUM_COMBINATIONS_TOUSE = 3 # number of refactoring combinations to use per entry
 RANDOM_SEED = 42 # seed for random selection of refactoring combinations
 FUNCTION_NAME = "task_func"  
 
