@@ -78,11 +78,13 @@ Applies clustering to select a diverse, non-redundant subset of valid clones.
 ## Requirements 
 * A hugging face token must be placed in a .env file in the root.
     * ```HF_TOKEN=token_here```
-* Python 3 or newer
-* Ollama running on a server (use the default OLLAMA port for local connection or 3333 for remote)
+* Python 3.10 or newer
+* Ollama installed and running (the service is external to Python dependencies)
     * Port configurations can be changed in ```pipeline/src/resources```
-* Inside the *pipeline* folder, run `pip install -r requirements.txt` to install required packages -- depending on your Python kernel additional packages may need to be installed
+* A JDK with `javac` and `java` on `PATH` for Java RQ1 generation
+* Inside the *pipeline* folder, run `pip install -r requirements.txt` to install the Python dependencies for the pipelines and notebooks
 * [MS C++ build tools](https://visualstudio.microsoft.com/pt-br/visual-cpp-build-tools/) -- make sure to install Desktop development with C++ (include Win 10/11 SDK and C++ CMake tools for Windows) -- this is **required by Codebleu**
+* For GPU fine-tuning, install a PyTorch build compatible with the machine's CUDA version if the default `torch` package does not provide the required accelerator support.
 ## Configuration
 The pipeline is pre-configured with the setup used for the experiments. 
 To change the configuration, modify [config.py](pipeline/src/config.py)
@@ -96,4 +98,3 @@ Inside the ```pipeline``` folder, there is a Jupyter Notebook for each RQ **foll
 Results are saved in ```results``` folder per RQ.
 
 The dataset is available on ```dataset/kamino_clones_dataset``` 
-

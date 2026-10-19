@@ -106,6 +106,7 @@ def _normalize_dataset(dataset):
         normalized_data = _normalize(dataset_split)
     print(json.dumps(normalized_data[0], indent=2))
 
+    os.makedirs(os.path.dirname(DATASET_PATH), exist_ok=True)
     with open(DATASET_PATH, "w", encoding="utf-8") as f:
         json.dump(normalized_data, f, indent=2, ensure_ascii=False)
 

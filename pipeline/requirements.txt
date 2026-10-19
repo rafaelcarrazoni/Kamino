@@ -1,17 +1,32 @@
-datasets 
-huggingface_hub
-ollama
-tree_sitter
-tree-sitter-python==0.21
-tree-sitter-java==0.21.0
-codebleu
-sentence_transformers
-torch
-torchvision --index-url https://download.pytorch.org/whl/cu130
-dotenv
-accelerate>=0.26.0
-parso
+# RQ1 Python/Java generation and validation
 astor
+codebleu
+datasets
+huggingface_hub
 matplotlib
+numpy
+pandas
+parso
+python-dotenv
 python-Levenshtein
-libcst
+requests
+scikit-learn
+scipy
+tree-sitter==0.22.3
+tree-sitter-java==0.21.0
+tree-sitter-python==0.21.0
+tqdm
+
+# RQ1-RQ4 analysis notebooks
+ipykernel
+ipywidgets
+jupyter
+pygments
+seaborn
+
+# Clone detection/fine-tuning (RQ3/RQ4)
+accelerate>=0.26.0
+sentence-transformers
+torch
+
+# CodeBLEU's parser package may require native build tools on Windows.

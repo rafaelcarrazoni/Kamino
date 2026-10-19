@@ -52,9 +52,10 @@ Recommended:
 ### Software
 
 - Python 3.10 or newer
-- Ollama
+- Ollama installed and running (the service is external to Python dependencies)
 - Hugging Face account and access token
 - Microsoft C++ Build Tools (required by CodeBLEU on Windows)
+- A JDK with `javac` and `java` on `PATH` for Java RQ1 generation
 
 ---
 
@@ -100,6 +101,8 @@ Inside the pipeline directory:
 cd pipeline
 pip install -r requirements.txt
 ```
+
+The requirements file installs Python dependencies for the generation pipelines, clone-detection workflows, and analysis notebooks. For GPU fine-tuning, install a PyTorch build compatible with the machine's CUDA version when the default `torch` package does not provide accelerator support.
 
 ### Configure Hugging Face Access
 
@@ -222,6 +225,8 @@ python -m src.java_rq1
 ```
 
 Esse fluxo requer um servidor Ollama ativo e o JDK (`javac` e `java`). O resultado é salvo em `results/RQ1/human_eval_clone_dataset.json`.
+
+O notebook RQ1 espera que o diretório de trabalho seja a raiz do repositório ou `pipeline`. Execute primeiro a pipeline Python para gerar os arquivos intermediários consumidos pelas células de análise.
 
 After execution completes, open:
 
