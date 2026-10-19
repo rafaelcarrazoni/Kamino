@@ -41,7 +41,7 @@ SCLONEBENCH_CS_PAIRS =  "../dataset/SemanticCloneBench/pairs_cs.json"
 BIGCLONEBENCH_PAIRS = "../dataset/BigCloneBench/pairs.json"
 
 # Normalization settings
-SAMPLE_SIZE = 50  # number of entries to sample for experiments
+SAMPLE_SIZE = 10  # number of entries to sample for experiments
 SAMPLE_SEED = 0   # random seed for sampling
 
 #  Models 
@@ -50,7 +50,7 @@ Gemma3   = "gemma3:latest"
 Gpt20b   = "gpt-oss:20b"
 LLama3   = "llama3.1:latest"
 Qwen3b   = "qwen2.5:3b"
-ALL_MODELS = [DeepSeek]
+ALL_MODELS = [DeepSeek, LLama3]
 
 #  Generation settings 
 LLM_OPTS = {
@@ -60,7 +60,7 @@ LLM_OPTS = {
     "num_predict": 1500,       # max output tokens
 }
 REMOTE_OLLAMA = False # change to False to use local ollama server
-N_ENTRIES = 40 # number of dataset entries to use as inputs for generation
+N_ENTRIES = 30 # number of dataset entries to use as inputs for generation
 CLONES_PER_ENTRY = 1 # number of clones to generate per dataset entry per prompt configuration
 OLLAMA_CONFIG_FILE_REMOTE = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")), "resources", "ollama_config_remote.json")
 OLLAMA_CONFIG_FILE_LOCAL = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")), "resources", "ollama_config_local.json")
