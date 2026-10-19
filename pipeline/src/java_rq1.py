@@ -5,12 +5,25 @@ import os
 import re
 import subprocess
 import tempfile
+from itertools import combinations
 from pathlib import Path
 
 from codebleu import calc_codebleu
 
-from src.config import ALL_MODELS, CLONES_PER_ENTRY, LLM_OPTS
-from src.steps.clone_gen import call_ollama_chat, test_LLM_connection
+from src.config import (
+    ALL_MODELS,
+    CLONES_PER_ENTRY,
+    COMBINATIONS_PER_SET,
+    LLM_OPTS,
+    NUM_COMBINATIONS_TOUSE,
+    RANDOM_SEED,
+    REFACS,
+)
+from src.steps.clone_gen import (
+    _select_balanced_combinations,
+    call_ollama_chat,
+    test_LLM_connection,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -18,6 +31,34 @@ INPUT_DATASET = ROOT / "results" / "RQ1" / "human_eval_clone_dataset.json"
 LEGACY_INPUT_DATASET = ROOT / "results" / "RQ1" / "humaneval_clone_dataset.json"
 JAVA_DATASET = Path(__file__).resolve().parent / "humaneval_java.json"
 OUTPUT_DATASET = ROOT / "results" / "RQ1" / "human_eval_clone_dataset.json"
+
+JAVA_REFACTORING = {
+    "refac_1": "Use a substantially different algorithmic approach, using idiomatic Java constructs.",
+    "refac_2": (
+        "Use a different Java standard-library API where appropriate. Do not introduce "
+        "third-party dependencies."
+    ),
+    "refac_3": (
+        "Change the data structures or representation where appropriate, while "
+        "preserving the required behavior."
+    ),
+    "refac_4": (
+        "Vary the Java coding style and organization while keeping the implementation "
+        "clear and behaviorally equivalent."
+    ),
+    "refac_5": (
+        "Separate side effects from computation where applicable; preserve the method "
+        "signature and required behavior."
+    ),
+    "refac_6": (
+        "Improve input validation and robustness where appropriate without changing "
+        "the required behavior."
+    ),
+    "refac_7": (
+        "Deliberately introduce a common code smell, such as duplicated logic or an "
+        "unnecessarily long method, while still satisfying the method contract."
+    ),
+}
 
 
 def _entry_index(entry_id):
@@ -53,6 +94,24 @@ def _method_body(response):
 def _java_source(java_entry, body):
     prompt = java_entry["prompt"].replace("import org.javatuples.*;\n", "")
     return f"{prompt}{body}\n{java_entry['tests']}"
+
+
+def _generation_prompt(java_entry, refacs):
+    unknown_refacs = sorted(set(refacs) - JAVA_REFACTORING.keys())
+    if unknown_refacs:
+        raise ValueError(f"Unsupported Java refactoring(s): {', '.join(unknown_refacs)}")
+
+    prompt = (
+        "Complete the Java method in the supplied Problem class. Output only the "
+        "method body, without markdown, the method signature, or the class. "
+        "The implementation must pass the main-method assertions.\n\n"
+    )
+    if refacs:
+        instructions = "\n".join(
+            f"- {JAVA_REFACTORING[refac]}" for refac in refacs
+        )
+        prompt += f"Apply these refactoring requirements:\n{instructions}\n\n"
+    return prompt + java_entry["prompt"]
 
 
 def _validate_java(source):
@@ -125,6 +184,19 @@ def _cluster_representatives(clones, threshold=0.4):
 
 
 def run_java_rq1(input_dataset=INPUT_DATASET, java_dataset=JAVA_DATASET, output_dataset=OUTPUT_DATASET):
+    unknown_refacs = sorted(set(REFACS) - JAVA_REFACTORING.keys())
+    if unknown_refacs:
+        raise ValueError(f"Unsupported Java refactoring(s): {', '.join(unknown_refacs)}")
+    all_refac_combinations = (
+        list(combinations(REFACS, COMBINATIONS_PER_SET)) if REFACS else [()]
+    )
+    selected_refac_combinations = _select_balanced_combinations(
+        all_refac_combinations,
+        NUM_COMBINATIONS_TOUSE,
+        REFACS,
+        RANDOM_SEED,
+    )
+
     if not test_LLM_connection():
         raise RuntimeError("Ollama is unavailable")
 
@@ -138,33 +210,37 @@ def run_java_rq1(input_dataset=INPUT_DATASET, java_dataset=JAVA_DATASET, output_
     for entry_number, entry in enumerate(final_entries, 1):
         index = _entry_index(entry["id"])
         java_entry = java_entries[index]
-        prompt = (
-            "Complete the Java method in the supplied Problem class. Output only the "
-            "method body, without markdown, the method signature, or the class. "
-            "The implementation must pass the main-method assertions.\n\n"
-            + java_entry["prompt"]
-        )
         candidates = []
         for model in ALL_MODELS:
-            for clone_number in range(CLONES_PER_ENTRY):
-                response = call_ollama_chat(
-                    [{"role": "user", "content": prompt}], model, LLM_OPTS
-                )
-                body = _method_body(response)
-                source = _java_source(java_entry, body)
-                valid, error = _validate_java(source)
-                if not valid:
-                    print(f"Skipped {entry['id']} ({model}): {error}")
-                    continue
-                candidates.append({
-                    "model": model,
-                    "context": "java_prompt",
-                    "strategy": "zero-shot",
-                    "clone_id": f"zero-shot {model}-java {clone_number + 1}",
-                    "code": source,
-                    "test_results": {"main": "PASS"},
-                    "metrics": {"codebleu": {}},
-                })
+            for refac_tuple in selected_refac_combinations:
+                selected_refacs = list(refac_tuple)
+                prompt = _generation_prompt(java_entry, selected_refacs)
+                refac_label = "+".join(selected_refacs) if selected_refacs else "no-refac"
+                for clone_number in range(CLONES_PER_ENTRY):
+                    response = call_ollama_chat(
+                        [{"role": "user", "content": prompt}], model, LLM_OPTS
+                    )
+                    body = _method_body(response)
+                    source = _java_source(java_entry, body)
+                    valid, error = _validate_java(source)
+                    if not valid:
+                        print(
+                            f"Skipped {entry['id']} ({model}, {refac_label}): {error}"
+                        )
+                        continue
+                    candidates.append({
+                        "model": model,
+                        "context": "java_prompt",
+                        "strategy": "zero-shot",
+                        "refacs": selected_refacs,
+                        "clone_id": (
+                            f"zero-shot {model}-java {refac_label} "
+                            f"{clone_number + 1}"
+                        ),
+                        "code": source,
+                        "test_results": {"main": "PASS"},
+                        "metrics": {"codebleu": {}},
+                    })
 
         java_representatives = _cluster_representatives(candidates)
         output_entry = dict(entry)
