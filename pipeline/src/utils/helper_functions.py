@@ -1042,7 +1042,7 @@ def build_pairs_bigclonebench(output_file=BIGCLONEBENCH_PAIRS, split="test"):
 
 
 def clean_and_split_clones(raw_path: str, cleaned_path: str) -> None:
-    print(f"Cleaning and splitting clones from {raw_path} to {cleaned_path}...")
+    print(f"Cleaning clones from {raw_path} to {cleaned_path}...")
     def _extract_imports(tree: ast.Module, source: str) -> str:
         lines = source.splitlines(keepends=True)
         import_lines = []
@@ -1174,14 +1174,6 @@ def clean_and_split_clones(raw_path: str, cleaned_path: str) -> None:
 
         return results
 
-    def _increment_clone_id(clone_id: str, new_index: int) -> str:
-        return re.sub(
-            r'(?<![:\w])(\d+)(?=\s)',
-            str(new_index),
-            clone_id,
-            count=1,
-        )
-
     def _split_clone(clone: dict) -> list[dict]:
         source = clone.get("code", "")
         try:
@@ -1193,35 +1185,31 @@ def clean_and_split_clones(raw_path: str, cleaned_path: str) -> None:
         import_src = _extract_imports(tree, source)
         task_funcs = _extract_task_funcs(source, tree, src_lines)
 
-        if len(task_funcs) <= 1:
+        if not task_funcs:
             return [clone]
 
-        clone_id = clone.get("clone_id", "")
-        counter_match = re.search(r'(?<![:\w])(\d+)(?=\s)', clone_id)
-        base_counter = int(counter_match.group(1)) if counter_match else 1
+        selected = next(
+            (item for item in task_funcs if item[3].name == "task_func"),
+            task_funcs[0],
+        )
+        code_block, is_class_wrapped, class_node, func_node = selected
 
-        new_clones = []
-        for idx, (code_block, is_class_wrapped, class_node, func_node) in enumerate(task_funcs):
+        if is_class_wrapped:
+            func_body = _build_class_wrapper(class_node, func_node, code_block)
+        else:
+            func_body = _rename_funcdef_to_task_func(code_block)
 
-            if is_class_wrapped:
-                func_body = _build_class_wrapper(class_node, func_node, code_block)
-            else:
-                func_body = _rename_funcdef_to_task_func(code_block) 
+        # Keep shared imports and only the primary task function.
+        if import_src.strip():
+            full_code = import_src.rstrip("\n") + "\n\n\n" + func_body
+        else:
+            full_code = func_body
 
-            # Prepend shared imports
-            if import_src.strip():
-                full_code = import_src.rstrip("\n") + "\n\n\n" + func_body
-            else:
-                full_code = func_body
- 
-            new_clone = dict(clone)
-            new_clone["code"] = full_code
-            new_clone["clone_id"] = _increment_clone_id(clone_id, base_counter + idx)
-            new_clone.pop("metrics", None)
-            new_clone.pop("test_results", None)
-            new_clones.append(new_clone)
-
-        return new_clones
+        cleaned_clone = dict(clone)
+        cleaned_clone["code"] = full_code
+        cleaned_clone.pop("metrics", None)
+        cleaned_clone.pop("test_results", None)
+        return [cleaned_clone]
 
     with open(raw_path, "r", encoding="utf-8") as f:
         data = json.load(f)
