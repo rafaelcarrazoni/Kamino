@@ -220,7 +220,14 @@ def run_java_rq1(input_dataset=INPUT_DATASET, java_dataset=JAVA_DATASET, output_
                     response = call_ollama_chat(
                         [{"role": "user", "content": prompt}], model, LLM_OPTS
                     )
-                    body = _method_body(response)
+                    try:
+                        body = _method_body(response)
+                    except ValueError as error:
+                        print(
+                            f"Skipped {entry['id']} ({model}, {refac_label}, "
+                            f"clone {clone_number + 1}): {error}"
+                        )
+                        continue
                     source = _java_source(java_entry, body)
                     valid, error = _validate_java(source)
                     if not valid:
