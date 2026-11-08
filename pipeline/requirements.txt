@@ -14,7 +14,7 @@ scikit-learn
 scipy
 tree-sitter==0.22.3
 tree-sitter-java==0.21.0
-tree-sitter-python==0.21.0
+tree-sitter-python==0.25.0
 tqdm
 
 # RQ1-RQ4 analysis notebooks
